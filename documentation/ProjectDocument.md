@@ -5,17 +5,18 @@ This assignment is worth 60% of your overall marks for the course.
 This is a group project where students will form a team to carry out the development effort. Each team will have a maximum of 4 participants. Work should be distributed evenly amongst team members.
 
 Marks will be assigned based on effective achievement in terms of:
-*  the successful completion of tasks accomplished on an individual basis
-*  the contribution of each individual team member towards achieving team based goals
-*  the contribution of each individual team member with regards to the:
 
-1. specification of the application,
-2. architecture, design, and development of the application,
-3. critical assessment of technologies utilised,
-4. critical assessment and implementation of testing strategies, 
-5. critical assessment and implementation of development methodologies
+* the successful completion of tasks accomplished on an individual basis
+* the contribution of each individual team member towards achieving team based goals
+* the contribution of each individual team member with regards to the:
+  1. specification of the application,
+  2. architecture, design, and development of the application,
+  3. critical assessment of technologies utilised,
+  4. critical assessment and implementation of testing strategies, 
+  5. critical assessment and implementation of development methodologies
 
 For each team member project marks will be allocated as follows:
+
 * Web Application: 0% - 40%
 * Technical Report: 0% - 40%
 * Presentation/Demonstration/Viva: 0% - 10%
@@ -28,6 +29,7 @@ Once the choice has been made on subject matter you should produce a project pro
 Typically, the project proposal document should provide the following pieces of information:
 
 Marks will be assigned based on effective achievement in terms of:
+
 1. An introduction to the project subject matter.
 2. The goals of the project.
 3. The strategy that will be employed to meet the stated project goals.
@@ -35,6 +37,7 @@ Marks will be assigned based on effective achievement in terms of:
 5. A list of the project deliverables that will be submitted on project completion.
 
 A project log document should be maintained throughout all stages of the project. This log should be used to accurately record:
+
 * all actions and tasks carried out
 * who carried out these actions and tasks
 * when actions and tasks were carried out
@@ -43,11 +46,13 @@ A project log document should be maintained throughout all stages of the project
 At the end of the project each of the team members should sign the log to confirm the accuracy of the contents.
 
 There are two main deliverables associated with the project:
+
 * A working enterprise web application
 * A technical report
 
 **The technical report should fully document the following areas:**
-- Background research and investigations
+
+1. Background research and investigations
 - Project Plan (record details of assigned responsibilities)
 - Software development methodology employed
 - Requirements analysis
