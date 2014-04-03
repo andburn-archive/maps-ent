@@ -1,7 +1,10 @@
-#To Do list - For the Application
+#ToDo
 
-- [ ] see if [Task Lists](https://github.com/blog/1375-task-lists-in-gfm-%0Aissues-pulls-comments) work
-- [ ] find out what to do
+##Long Term
+* No nice application marking scheme :poop:
 
 
+##Weekly 
+###Week 1
+* ~~To Do list Made~~
 

@@ -33,13 +33,13 @@ Marks will be assigned based on effective achievement in terms of:
 3. The strategy that will be employed to meet the stated project goals.
 4. The key characteristics of your project in terms of functionality.
 5. A list of the project deliverables that will be submitted on project completion.
-6. 
+
 A project log document should be maintained throughout all stages of the project. This log should be used to accurately record:
 * all actions and tasks carried out
 * who carried out these actions and tasks
 * when actions and tasks were carried out
 * the time spent on the actions and tasks
-* 
+
 At the end of the project each of the team members should sign the log to confirm the accuracy of the contents.
 
 There are two main deliverables associated with the project:
