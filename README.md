@@ -1,17 +1,26 @@
 maps-ent
 ========
 
-An enterprise level application to manage a mapping RIA and provide a Web API
+An enterprise level application to manage the content for a map-based RIA and provide a Web API
 
 -------
 
 ##About
 Enterprise Frameworks Project, MSc in Web Technologies (NCI)
 
-###Group
-* Fiona McAndrew
-* Adam Harrington
-* Andrew Burnett
+**Project Title**  | maps-ent
+:----------------- | :---------------------
+**Team Members**   | Andrew Burnett
+&nbsp;             | Adam Harrington
+&nbsp;             | Fiona McAndrew
+**Tutor**          | Vikas Sahni
+**Technologies**   | .NET MVC5 EF
+&nbsp;             | C#
+&nbsp;             | Azure
+**Source**         | https://github.com/andburn/maps-ent
+**URL**            | n/a
+**Licence**        | n/a
+
 
 ###Project Blog
 http://enterpriseframeworks.wordpress.com/
