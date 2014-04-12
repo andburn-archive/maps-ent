@@ -35,7 +35,28 @@ namespace MapsAgo.WebUI.Controllers
             return View(location);
         }
 
+        // GET: /Location/JsonData/5
+        public ActionResult JsonData(int id)
+        {
+            var db = new MapsDbContext();
+            var location = db.Locations
+                .Where(x => x.LocationID == id)
+                .Select(s => new {
+                    id = s.LocationID,
+                    name = s.Name,
+                    latitude = s.Latitude,
+                    longtitude = s.Longitdude,
+                    events = s.Events.Select(e => new {
+                        id = e.EventID,
+                        name = e.Name,
+                        startDate = e.StartDate,
+                        endDate = e.EndDate,
+                        description = e.Description
+                    })
+                });
 
+            return Json(location, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: /Location/Create
         public ActionResult Create()
