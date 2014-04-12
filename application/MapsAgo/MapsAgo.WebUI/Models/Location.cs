@@ -7,9 +7,16 @@ namespace MapsAgo.WebUI.Models
 {
     public class Location
     {
+        // Primary Key
+        public int LocationID { get; set; }
+
+        // Properties
         // TODO float/double best for lat/long
-        public double latitude { get; set; }
-        public double longitdude { get; set; }
-        public string name { get; set; }
+        public double Latitude { get; set; }
+        public double Longitdude { get; set; }
+        public string Name { get; set; }
+
+        // Navigation properties
+        public virtual ICollection<Event> Events { get; set; }
     }
 }
