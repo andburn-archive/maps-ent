@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,7 @@ namespace MapsAgo.WebUI.Models
         public string Name { get; set; }
 
         // Navigation properties
+        [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }
     }
 }
