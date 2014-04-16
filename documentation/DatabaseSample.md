@@ -11,10 +11,10 @@ ID      | Name      | Type       | Source       | Description
 
 ### Event table sample
 
-ID  | Name                 | Type     | ShortDescription | FullDescription | Location | Links | Images | Video | Source  | Created by | Date Created | Last Modified
---- | ------------------   | ---------| -----------------| ----------------| ---------| ----- | ------ | ----- | ------  | ---------- | ------------ | -------------
-1   | "Battle of Hastings" | "War"    | "120 chars max"  | "Full Content"  | Ref1     | [Ref] | [Ref]  | [Ref] |"http://"| User Ref   | Date         | Date
-2   | "Hulahoop invented"  | "Culture"| "120 chars max"  | "Full Content"  | Ref2     | [Ref] | [Ref]  | [Ref] |"http://"| User Ref   | Date         | Date
+ID  | Name                 | Type     | Excerpt          | FullContent     | Location | RelatedEvents|Links | Images | Video | Source  | Created by | Date Created | Last Modified
+--- | ------------------   | ---------| -----------------| ----------------| ---------| ------------ | ---- | ------ | ----  | ------- | ---------- | -------------| ------------
+1   | "Battle of Hastings" | "War"    | "120 chars max"  | "Full Content"  | Ref1     | [Ref,Ref,Ref]|[Ref] | [Ref]  | [Ref] |"http://"| User Ref   | Date         | Date
+2   | "Hulahoop invented"  | "Culture"| "120 chars max"  | "Full Content"  | Ref2     | [Ref,Ref,Ref]|[Ref] | [Ref]  | [Ref] |"http://"| User Ref   | Date         | Date
 
 ### Locations Table Sample
 
