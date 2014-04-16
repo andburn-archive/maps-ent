@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.WebUI", "MapsAgo.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.UnitTests", "MapsAgo.UnitTests\MapsAgo.UnitTests.csproj", "{01742984-608D-493D-88B7-137E810787B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.Freebase", "MapsAgo.Freebase\MapsAgo.Freebase.csproj", "{9B498EDD-D8D8-4147-83A6-30676099390A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{01742984-608D-493D-88B7-137E810787B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01742984-608D-493D-88B7-137E810787B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01742984-608D-493D-88B7-137E810787B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B498EDD-D8D8-4147-83A6-30676099390A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B498EDD-D8D8-4147-83A6-30676099390A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B498EDD-D8D8-4147-83A6-30676099390A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B498EDD-D8D8-4147-83A6-30676099390A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
