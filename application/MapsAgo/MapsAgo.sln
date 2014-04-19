@@ -3,31 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.WebUI", "MapsAgo.WebUI\MapsAgo.WebUI.csproj", "{0F3B8853-DDD0-472E-BBD7-B92CE83142A7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.UnitTests", "MapsAgo.UnitTests\MapsAgo.UnitTests.csproj", "{01742984-608D-493D-88B7-137E810787B4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.Freebase", "MapsAgo.Freebase\MapsAgo.Freebase.csproj", "{9B498EDD-D8D8-4147-83A6-30676099390A}"
-EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0F3B8853-DDD0-472E-BBD7-B92CE83142A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F3B8853-DDD0-472E-BBD7-B92CE83142A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F3B8853-DDD0-472E-BBD7-B92CE83142A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F3B8853-DDD0-472E-BBD7-B92CE83142A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{01742984-608D-493D-88B7-137E810787B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{01742984-608D-493D-88B7-137E810787B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{01742984-608D-493D-88B7-137E810787B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{01742984-608D-493D-88B7-137E810787B4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9B498EDD-D8D8-4147-83A6-30676099390A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9B498EDD-D8D8-4147-83A6-30676099390A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9B498EDD-D8D8-4147-83A6-30676099390A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9B498EDD-D8D8-4147-83A6-30676099390A}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
