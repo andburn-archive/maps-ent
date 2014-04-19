@@ -1,9 +1,16 @@
+# Project Notes
+
+- Are some locations considered equal (2.333, -1.222) == (2.3, -1.2) ?
+- Can one event have many locations, or are such events too broad.
+
 # General ASP.NET & Visual Studio Notes
 
 - Bundling and Minification
  - create bundles in `App_Start\BundleConfig.cs`
- - To load in view add `@Styles.Render(ì~/Content/cssî)` and/or `@Styles.Render(~/bundles/js)` to `_Layout.cshtml`, the actual paths depend on the particular project.
- 
+ - To load in view add `@Styles.Render(‚Äú~/Content/css‚Äù)` and/or `@Styles.Render(~/bundles/js)` to `_Layout.cshtml`, the actual paths depend on the particular project.
+- Formatting model properties in views with annonations e.g. `[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]`
+
+
 -----
  
 # Notes on Francis' Moodle Posts
