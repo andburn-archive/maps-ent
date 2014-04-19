@@ -9,7 +9,7 @@
  - create bundles in `App_Start\BundleConfig.cs`
  - To load in view add `@Styles.Render(“~/Content/css”)` and/or `@Styles.Render(~/bundles/js)` to `_Layout.cshtml`, the actual paths depend on the particular project.
 - Formatting model properties in views with annonations e.g. `[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]`
-
+- When updating references in one project make sure you do the same in other projects, don't forget unit test project
 
 -----
  

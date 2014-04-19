@@ -47,6 +47,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\MediaType.cs" />
+    <Compile Include="Data\IEventRepository.cs" />
+    <Compile Include="Data\IEventTypeRepository.cs" />
+    <Compile Include="Data\ILocationRepository.cs" />
+    <Compile Include="Data\IMediaRepository.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\EventType.cs" />
     <Compile Include="Model\Location.cs" />
@@ -54,7 +58,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\" />
     <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>
