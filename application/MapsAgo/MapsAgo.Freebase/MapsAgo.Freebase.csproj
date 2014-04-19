@@ -38,6 +38,9 @@
     <Reference Include="Google.Apis.Core">
       <HintPath>..\packages\Google.Apis.Core.1.8.1\lib\portable-net4+sl4+wp71+win8\Google.Apis.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis.Discovery.v1">
+      <HintPath>..\packages\Google.Apis.Discovery.v1.1.8.1.410\lib\portable-net4+sl4+wp71+win8\Google.Apis.Discovery.v1.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis.Freebase.v1">
       <HintPath>..\packages\Google.Apis.Freebase.v1.1.8.1.530\lib\portable-net4+sl4+wp71+win8\Google.Apis.Freebase.v1.dll</HintPath>
     </Reference>
@@ -83,6 +86,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="search_fbase.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />

@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Freebase</title>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js"></script>
+</head>
+<body style="background-color: black; color: white;">
+    <div id="search-area">
+        <!-- topic selection -->        
+        <input type="radio" name="topic" id="rbattles" value="/military/military_conflict" checked />
+        <label for="rbattles">Battles</label>
+        <br />        
+        <input type="radio" name="topic" id="rdisasters" value="/event/disaster" />
+        <label for="rdisasters">Disasters</label>
+        <br />        
+        <input type="radio" name="topic" id="rrecordings" value="/music/recording" />
+        <label for="rrecordings">Recordings</label>
+        <br />        
+        <input type="radio" name="topic" id="rartists" value="/visual_art/visual_artist" />
+        <label for="rartists">Artists</label>
+        <br />
+        <!-- search box -->
+        <input type="text" name="searchbox" id="searchbox" />
+        <input type="button" id="searchbutton" value="Search"/>
+    </div>
+    <div id="search-results"></div>
+    <div id="data-area"></div>
+    <script>
+        $("#searchbutton").on("click", function(event) {
+            event.preventDefault();
+            console.log("clicked");
+            var topic = $("input[name=topic]:checked").val();
+            console.log(topic);
+            var text = $("input#searchbox").val();
+            search(topic, text);
+        });
+
+        /* TODO escape all content from web */
+
+        var search = function(topic, text) {
+            var service_url = 'https://www.googleapis.com/freebase/v1/search';
+            var params = {
+                'query': text,
+                'filter': '(all type:' + topic + ')',
+                'limit': 10,
+                'indent': true
+            };
+            var $search_div = $("#search-results");
+            $search_div.text('');
+            $.getJSON(service_url + '?callback=?', params, function(response) {
+                // print json raw string
+                console.log(JSON.stringify(response, null, 2));
+                $.each(response.result, function(i, result) {
+                    $('<a>', {
+                        'href': '#',
+                        'data-mid': result['mid'],
+                        'data-topic': topic,
+                        'text': result['name']
+                    }).on("click", details)
+                        .appendTo($('<li>')
+                        .appendTo($search_div));
+                    console.log(result);
+                });
+            });
+        }
+
+        var details = function(event) {
+            event.preventDefault();
+            var mid = $(this).data('mid');
+            var topic = $(this).data('topic');
+            console.log('details: ' + mid);
+            console.log('details: ' + topic);
+            var service_url = 'https://www.googleapis.com/freebase/v1/topic';
+            var params = {};
+            // NOTE: to filter use 'filter=/time/event/locations&filter=/time/event/start_date' for params
+            $.getJSON(service_url + mid + '?callback=?', params, function(data) {
+                // print json raw string
+                console.log(JSON.stringify(data, null, 2));
+               // $('<pre>', { text: JSON.stringify(data, null, 2) }).appendTo($("#data-area"));
+                $('<div>', { text: data.property['/type/object/name'].values[0].text  }).appendTo($("#data-area"));
+                if (topic === "/military/military_conflict") {
+                    parseMilitary(data.property);
+                } else if (topic === "/event/disaster") {
+                    parseDisaster(data.property);
+                }
+            });
+        }
+
+        var parseMilitary = function(info) {
+            var start_date, end_date, location;
+            var count = info['/time/event/start_date'].count;
+            if (count >= 0) {
+                start_date = info['/time/event/start_date'].values[0].text; // value also
+                console.log('mil: ' + start_date);
+            }
+            count = info['/time/event/end_date'].count;
+            if (count >= 0) {
+                end_date = info['/time/event/end_date'].values[0].text; // value also
+                console.log('mil: ' + end_date);
+            }
+            count = info['/time/event/locations'].count;
+            if (count >= 0) {
+                console.log('mil: ' + info['/time/event/locations'].values[0]);
+                parseLocation(info['/time/event/locations'].values[0]);
+            }
+            
+        }
+
+        var parseDisaster = function(info) {
+
+        }
+
+        var parseRecording = function(info) {
+
+        }
+
+        var parseArtist = function(info) {
+
+        }
+
+        var parseCommon = function(info) {
+
+        }
+
+        var parseLocation = function(info) {
+            var name, alias, lat, long
+            var text = info.text;
+            var id = info.id;
+            var service_url = 'https://www.googleapis.com/freebase/v1/topic';
+            var params = {};
+            $.getJSON(service_url + id + '?callback=?', params, function(data) {
+                // print json raw string
+                console.log(JSON.stringify(data, null, 2));
+                var root = data.property;
+                // TODO: check count > 0, need checks all over this!
+                var geo = root["/location/location/geolocation"].values[0].property;
+                lat = geo["/location/geocode/latitude"].values[0].value;
+                long = geo["/location/geocode/longitude"].values[0].value;
+                // NOTE: contains "/location/location/events"
+                alias = root["/common/topic/alias"].values[0].text; // value also
+                // NOTE: seems can't trust count value, musn't be array len?
+                // TODO: see how this matches event location name(s)
+                name = root["/type/object/name"].values[0].text;
+                console.log(lat + ", " + long + ", " + alias + ", " + name);
+            });
+        }
+
+    </script>
+</body>
+</html>
