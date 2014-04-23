@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.Web", "MapsAgo.Web\MapsAgo.Web.csproj", "{6B6FD200-A465-4F8A-B15E-0F97E1D698CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{38C12377-7E5F-43A8-A2DE-A2096B1E74D1} = {38C12377-7E5F-43A8-A2DE-A2096B1E74D1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapsAgo.Tests", "MapsAgo.Tests\MapsAgo.Tests.csproj", "{5F98E6AA-7961-4795-BA5D-7282160AC024}"
 EndProject
