@@ -10,7 +10,7 @@ namespace MapsAgo.Model
     class Media
     {
 
-        public int MediaId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 

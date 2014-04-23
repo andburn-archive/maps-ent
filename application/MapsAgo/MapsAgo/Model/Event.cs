@@ -10,7 +10,7 @@ namespace MapsAgo.Model
     class Event
     {
 
-        public int EventID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -26,7 +26,7 @@ namespace MapsAgo.Model
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
 
-        // TODO: need this to link to User table
+        // TODO: need this to link to User table?
         public string CreatedBy { get; set; }
 
         public DateTime DateCreated { get; set; }
@@ -36,16 +36,12 @@ namespace MapsAgo.Model
 
         public string Source { get; set; }          
 
-        // TODO: self referencing?
-        public virtual ICollection<Event> RelatedEvents { get; set; }
-
-        public virtual ICollection<Media> MediaList { get; set; }
-
         // Foreign key 
         public int LocationID { get; set; }
 
-        // TODO: is this necessary? 
-        public virtual Location Location { get; set; }
-      
+        public virtual ICollection<Media> MediaList { get; set; }
+
+        // TODO: self referencing?
+        //public virtual ICollection<Event> RelatedEvents { get; set; }
     }
 }
