@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    class EventType
+    public class EventType
     {
 
         public int Id { get; set; }

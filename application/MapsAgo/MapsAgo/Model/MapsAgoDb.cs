@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    class MapsAgoDb : DbContext
+    public class MapsAgoDb : DbContext
     {
 
         public DbSet<Event> Events { get; set; }

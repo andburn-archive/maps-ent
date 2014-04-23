@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MapsAgo.Model
 {
-    class Event
+    public class Event
     {
 
         public int Id { get; set; }

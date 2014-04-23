@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    class Location
+    public class Location
     {
 
         public int Id { get; set; }

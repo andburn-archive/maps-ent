@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    class Media
+    public class Media
     {
 
         public int Id { get; set; }
