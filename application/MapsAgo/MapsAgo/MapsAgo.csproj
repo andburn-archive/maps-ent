@@ -54,6 +54,7 @@
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\EventType.cs" />
     <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\MapsAgoDb.cs" />
     <Compile Include="Model\Media.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
