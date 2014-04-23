@@ -97,6 +97,10 @@
       <Project>{6B6FD200-A465-4F8A-B15E-0F97E1D698CD}</Project>
       <Name>MapsAgo.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MapsAgo\MapsAgo.csproj">
+      <Project>{38c12377-7e5f-43a8-a2de-a2096b1e74d1}</Project>
+      <Name>MapsAgo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

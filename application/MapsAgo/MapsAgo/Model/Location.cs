@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    class Location
+    public class Location
     {
 
-        public int LocationId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
