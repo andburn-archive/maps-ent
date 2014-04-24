@@ -1,5 +1,5 @@
-
-#Enterprise Frameworks Project
+Enterprise Frameworks Project
+=======================
 
 1. Background research and investigations
 2. Project Plan
