@@ -12,13 +12,16 @@ namespace MapsAgo.Model
 
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        public string Type { get; set; }
-
+        // TODO: could possibly generate this from description
+        [StringLength(128)]
         public string Excerpt { get; set; }
 
-        public string Description { get; set; }    
+        public string Description { get; set; }
+
+        public string Source { get; set; } 
 
         [Column(TypeName = "datetime2")]        
         public DateTime StartDate { get; set; }
@@ -26,22 +29,21 @@ namespace MapsAgo.Model
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
 
-        // TODO: need this to link to User table?
-        public string CreatedBy { get; set; }
-
         public DateTime DateCreated { get; set; }
 
-        // TODO: could this be an annotated Timestamp field?
-        public DateTime LastModified { get; set; }
+        // TODO: need to find out how to convert this for display
+        [Timestamp]
+        public byte[] LastModified { get; set; }                 
 
-        public string Source { get; set; }          
+        // Links to other tables
 
-        // Foreign key 
-        public int LocationID { get; set; }
+        public int LocationId { get; set; }
 
-        public virtual ICollection<Media> MediaList { get; set; }
+        public int EventTypeId { get; set; }
 
-        // TODO: self referencing?
-        //public virtual ICollection<Event> RelatedEvents { get; set; }
+        public virtual ICollection<Medium> Media { get; set; }
+
+        // Link to User table is dealt with in 'IdentityModels.cs'
+
     }
 }
