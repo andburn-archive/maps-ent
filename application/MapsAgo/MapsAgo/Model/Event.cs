@@ -38,8 +38,10 @@ namespace MapsAgo.Model
         // Links to other tables
 
         public int LocationId { get; set; }
+        public virtual Location Location { get; set; }
 
         public int EventTypeId { get; set; }
+        public virtual EventType Type { get; set; }
 
         public virtual ICollection<Medium> Media { get; set; }
 
