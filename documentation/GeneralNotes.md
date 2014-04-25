@@ -10,7 +10,8 @@
  - To load in view add `@Styles.Render(“~/Content/css”)` and/or `@Styles.Render(~/bundles/js)` to `_Layout.cshtml`, the actual paths depend on the particular project.
 - Formatting model properties in views with annonations e.g. `[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM-dd-yyyy}")]`
 - When updating references in one project make sure you do the same in other projects, don't forget unit test project
-
+- After `Enable-Migrations` set `AutomaticMigrationsEnabled = true;` in `Configurations.cs`
+- For DB spatial type point use `DbGeography.FromText("POINT(Long Lat)")`
 -----
  
 # Notes on Francis' Moodle Posts
@@ -20,7 +21,7 @@ Have a seperate project in your solution for:
 
 - MVC stuff
 - Models
- - for use with DI/IOC, the I in SOLID
+ - for use with DI/IOC, the D in SOLID
 - Tests
  - MSTest for Unit testing, WaitN for Integration testing
 - Specs 
