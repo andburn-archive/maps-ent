@@ -136,8 +136,3 @@ Acceptance testing
 
 API talk about API here
 
-
-	* use of client-side processing,
-	*use of Ajax,
-   *use of web services,
-    *use of a worklow engine 
