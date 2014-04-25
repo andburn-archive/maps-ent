@@ -28,7 +28,7 @@ namespace MapsAgo.Web.Migrations
                 new EventType { Name = "Default" }
             };
 
-            var MediaList = new List<Resource> {
+            var Resources = new List<Resource> {
                 new Resource {
                     Name = "Wikipedia",
                     Type = ResourceType.Link,
@@ -90,16 +90,14 @@ namespace MapsAgo.Web.Migrations
                             StartDate = DateTime.Parse("14-3-1916"),
                             EndDate = DateTime.Parse("7-2-1917"),
                             DateCreated = DateTime.Parse("1-2-2014"),             
-                            Resources = MediaList,
+                            Resources = Resources,
                             Type = EventTypes.ElementAt(1)
                         }
                     }
                 }
             };
 
-            // TODO: not sure how this works really
-            LocList.ForEach(loc => context.Locations.AddOrUpdate(loc));
-            //SaveChanges(context);
+            context.Locations.AddOrUpdate(r => r.Name, LocList.ToArray());
 
         }
     }
