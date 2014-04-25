@@ -3,8 +3,7 @@ Enterprise Frameworks Project
 
 1. Background research and investigations
 2. Project Plan
- Due care should be taken to accurately record details of which team member was assigned re-
-sponsibility for each activity
+ - Due care should be taken to accurately record details of which team member was assigned responsibility for each activity
 3. Software development methodology employed o Requirements analysis
 4. Use cases
 5. Architecture/Design approach
@@ -21,9 +20,7 @@ sponsibility for each activity
 16. Other relevant features of the application
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+------
 
 ##1. Background research and investigations
 
@@ -31,8 +28,7 @@ sponsibility for each activity
 ##2. Project Plan
 
 (Frame of ms project created)
- Due care should be taken to accurately record details of which team member was assigned re-
-sponsibility for each activity
+Due care should be taken to accurately record details of which team member was assigned responsibility for each activity
 ##3. Software development methodology employed, requirements analysis
 (Adam has done research on this)
 
@@ -102,6 +98,18 @@ Write about
 Authentication here? 
 CAn we speak about  Roles here?
 
+**For form authentication: there is a 2 part CSRF**
+
+- In View, add a antiforgery token to the form
+
+ `@html.AntiForgeryToken()`
+
+- In Controller, valid that action which is an desination for the post
+
+    `[ValidateAntiForgery]`
+	
+
+
 ##13. Configuration of the application
 
 ???
@@ -112,7 +120,7 @@ CAn we speak about  Roles here?
 
 Traditional waterfall development model
     *White-box testing
-        *???? API testing (application programming interface) – testing of the application using public and private APIs
+        *???? API testing (application programming interface) â€“ testing of the application using public and private APIs
      *Black-box testing
      *
 ###Testing Levels
@@ -129,7 +137,7 @@ Acceptance testing
 API talk about API here
 
 
-   * use of client-side processing,
-   *use of Ajax,
-    *use of web services,
+	* use of client-side processing,
+	*use of Ajax,
+   *use of web services,
     *use of a worklow engine 
