@@ -1,30 +1,49 @@
 namespace MapsAgo.Web.Migrations
 {
+    using MapsAgo.Common;
     using MapsAgo.Model;
+    using MapsAgo.Web.Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Data.Entity.Spatial;
+    using System.Data.Entity.Validation;
     using System.Linq;
+    using System.Text;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MapsAgo.Model.MapsAgoDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<MapsAgo.Model.MapsAgoDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(MapsAgo.Model.MapsAgoDb context)
+        protected override void Seed(MapsAgo.Model.MapsAgoDbContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            context.EventTypes.AddOrUpdate(et => et.Name,
+            var EventTypes = new List<EventType> {
                 new EventType { Name = "Battles" },
                 new EventType { Name = "Default" }
-                );
+            };
 
-            context.Locations.AddOrUpdate(loc => loc.Name,
+            var MediaList = new List<Resource> {
+                new Resource {
+                    Name = "Wikipedia",
+                    Type = ResourceType.Link,
+                    Url = "http://en.wikipedia.org/wiki/index.html?curid=1033164",
+                    Description = "Wikipedia Link"
+                },
+                new Resource {
+                    Name = "Punitive-truck-train",
+                    Type = ResourceType.Image,
+                    Url = "http://upload.wikimedia.org/wikipedia/en/9/9f/Punitive-truck-train.png",
+                    Description = "Punitive-truck-train"
+                }
+            };
+
+            var LocList = new List<Location> {
                 new Location 
                 { 
                     Name = "Stockholm", 
@@ -40,8 +59,7 @@ namespace MapsAgo.Web.Migrations
                             StartDate = DateTime.Parse("07-11-1520"),
                             EndDate = DateTime.Parse("10-11-1520"),
                             DateCreated = DateTime.Parse("2013-1-12"),
-                            LocationId = 1,
-                            EventTypeId = 1
+                            Type = EventTypes.ElementAt(0)
                         }
                     }
                 },
@@ -61,8 +79,7 @@ namespace MapsAgo.Web.Migrations
                             StartDate = DateTime.Parse("16-9-1810"),
                             EndDate = DateTime.Parse("1821-1-1"),
                             DateCreated = DateTime.Parse("10-1-2014"),
-                            LocationId = 2,
-                            EventTypeId = 1
+                            Type = EventTypes.ElementAt(1)
                         },
                         new Event
                         {
@@ -72,24 +89,18 @@ namespace MapsAgo.Web.Migrations
                             Source = "http://www.freebase.com/m/0401ff",
                             StartDate = DateTime.Parse("14-3-1916"),
                             EndDate = DateTime.Parse("7-2-1917"),
-                            DateCreated = DateTime.Parse("1-2-2014"),
-                            LocationId = 2,
-                            EventTypeId = 1
+                            DateCreated = DateTime.Parse("1-2-2014"),             
+                            Resources = MediaList,
+                            Type = EventTypes.ElementAt(1)
                         }
                     }
                 }
-                );
+            };
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            // TODO: not sure how this works really
+            LocList.ForEach(loc => context.Locations.AddOrUpdate(loc));
+            //SaveChanges(context);
+
         }
     }
 }

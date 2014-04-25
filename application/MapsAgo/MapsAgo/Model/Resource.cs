@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MapsAgo.Model
 {
-    public class Medium
+    public class Resource
     {
 
         public int Id { get; set; }
@@ -18,12 +19,15 @@ namespace MapsAgo.Model
         public string Name { get; set; }
 
         [Required]
-        public MediaType Type { get; set; }
+        public ResourceType Type { get; set; }
 
         [Required]
+        [StringLength(2048)]
         public string Url { get; set; }
 
         public string Description { get; set; }
+
+        public virtual ICollection<Event> Events { get; set; }
 
     }
 }
