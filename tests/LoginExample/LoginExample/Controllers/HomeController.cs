@@ -15,14 +15,15 @@ namespace LoginExample.Controllers
             return View();
         }
         //only an admin user can view the ABOUT page
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin , AuthorizedUser")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-        //Protected by the deafulat filter above
+        //only the admin should see this 
+        [Authorize(Roles = "Admin")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
