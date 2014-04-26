@@ -1,6 +1,11 @@
 Enterprise Frameworks Project
 =======================
 
+Andrew 
+Fiona - 13121693
+Adam  - 
+
+------
 1. Background research and investigations
 2. Project Plan
  - Due care should be taken to accurately record details of which team member was assigned responsibility for each activity
@@ -27,12 +32,42 @@ Enterprise Frameworks Project
 (slot in  )
 ##2. Project Plan
 
-(Frame of ms project created)
-Due care should be taken to accurately record details of which team member was assigned responsibility for each activity
+
+Project plan see appendix I. This includes a description of all tasks identified and explained. It also shows resource allocation and timelines.
+
+
 ##3. Software development methodology employed, requirements analysis
+Development Methodology
+
+### Waterfall ###
+(insert image of water here , image is created)
+
+
+1. **Requirement Gathering and analysis**: All possible requirements of the system to be developed are captured in this phase and documented in a requirement specification doc.
+1. **System Design**: The requirement specifications from first phase are studied in this phase and system design is prepared. System Design helps in specifying hardware and system requirements and also helps in defining overall system architecture.
+1. ** Implementation:** With inputs from system design, the system is first developed in small programs called units, which are integrated in the next phase. Each unit is developed and tested for its functionality which is referred to as Unit Testing.
+1. **Integration and Testing**: All the units developed in the implementation phase are integrated into a system after testing of each unit. Post integration the entire system is tested for any faults and failures.
+1. **Deployment** of system: Once the functional and non functional testing is done, the product is deployed in the customer environment or released into the market.
+1. **Maintenance**: There are some issues which come up in the client environment. To fix those issues patches are released. Also to enhance the product some better versions are released. Maintenance is done to deliver these changes in the customer environment.
+
+### Waterfall Model Pros & Cons ###
+
+| Pros                   				| Cons                 | 
+| --------------------------------------|-----------------------| 
+| Simple and easy to understand phases, therefore good for novice programmers |  High amounts of risk and uncertainty. 
+| Easy to manage due to the rigidity of the model, each phase has specific deliverables and a review process.      |   High amounts of risk and uncertainty. |	
+|Phases are processed and completed one at a time.| Cannot accommodate changing requirements.		
+|Works well for smaller projects where requirements are very well understood.|  Adjusting scope during the life cycle can end a project.
+|Well understood milestones.| Integration is traditionality done as at the very end, which doesn't allow identifying any technological or business bottleneck or challenges early. [^1]
+|Easy to arrange tasks.| No working software is produced until late during the life cycle.	 
+
+
+[^1]: Test deployment was undertaken during the development phase, as the systems needed to be tested.
+(overlay a gantt chart)
+
 (Adam has done research on this)
 
-###Azure Deployment
+###Azure Deployment - Move to another section.
 
 For information regarding azure "virtual machine" vs. "websites" see disambiguation [here][azure-lingo]. The key points were that websites are platform as a service while virtual machines are like AWS EC2 and have to be configured manually. Websites suit us.
 
@@ -59,44 +94,86 @@ As long as a client can read the serialization format, it can deserialize the ob
 
 ##4. Use cases
 
+(Alter user requirements) - asssign to fiona - fella to review
 ??
 
 
 ##5. Architecture/Design approach
 
+CODE FIRST , ENTITY DIAGRAMS, (andrew to lash in)
+domain model directly maps to database.
+
+
+freebase wont map to database
 
 ##6. Models (Class Models / Data Models etc.)
 
 (Andrew to write here about Models to Date)
 
-###2 different types of data models :
+### Model Types
 
-1. Database Model(link for now, hard code when finalised)
+*Actual Models (Models)*
+
+These are the model classes which actually communicate with the back end DB. There is some
+things you can do on these that does not make sense to do elsewhere. Most importantly to note is
+that here is where you can do certain server side validation, and where you usually include every field
+in the DB tables even if they are not shown in the views).
+
+*View Models (ViewModels)*
+
+These are the model classes your views use. While you are still using strictly MVC, you can add a
+ViewModel folder and copy your model classes into it. This gives you an ability to easily add client
+side validation (yeah, were still on the server side but the tooling will generate automatically the
+JavaScript needed on the client side if you let it) or to only show certain fields on your form but to still
+have access to the full set of fields at the back end. 
+ 
+
+###2 different types of Data Models :
+
+1. **Database Model** (link for now, hard code when finalised)
 [Database Samples](https://github.com/andburn/maps-ent/blob/master/documentation/DatabaseSample.md)
 
 
-2. Overview of data modeling context: 
-![Bilby Stampede](http://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Data_modeling_context.svg/500px-Data_modeling_context.svg.png)
+
 
 (we may need to create our own version)
 
 ##7. Implementation of particular OOP constructs
 
+SOLID - 
+we favoured compostite over inheritance. 
+
+single responsiblity
+
+repository pattern why we did not use it.
+
+We used MVC
+
 ##8. Design patterns and architectural patterns implemented in the application
 
 ##9. ORM tool usage
 
+Entiity frameworks - Andrew 
 
 ##10. Dependency injection / IoC container usage
 
-Write about 
+maybe in the freebase section, as an example - andrew
+
 ##11. How cross-cutting concerns have been handled
 
 ????
-##12. Security of the application
+
+logging , and maybe auth?  - andrew seems to know about this 
 
 Authentication here? 
 CAn we speak about  Roles here?
+
+
+	
+
+That is why we have used strictly typed view. 
+
+##12. Security of the application
 
 **For form authentication: there is a 2 part CSRF**
 
@@ -107,32 +184,37 @@ CAn we speak about  Roles here?
 - In Controller, valid that action which is an desination for the post
 
     `[ValidateAntiForgery]`
-	
-
 
 ##13. Configuration of the application
+
+(Web Config?)
+(Could we speak about role, authentication here)
 
 ???
 ##14. Scalability of the application
 
 ??
+(Azure, cloud scability)
+
 ##15. Testing Approach (in terms of both functional and non-functional requirements)
 
-Traditional waterfall development model
-    *White-box testing
-        *???? API testing (application programming interface) – testing of the application using public and private APIs
-     *Black-box testing
-     *
+This project uses the waterfall development model testing approach. 
+   
 ###Testing Levels
-Unit testing
+- Unit testing - how do you varify it?
+- Component interface testing - does log in, button,etc work.
+- System testing - scenerio based testing, based on user cases.
+- Acceptance testing - out of scope for college project, lecuturer to do this
 
-Component interface testing
 
-System testing
-
-Acceptance testing 
+(Notes
+System:
+- White-box testing
+- API testing (application programming interface) – testing of the application using public and private APIs  
+- Black-box testing
+)
 ##16. Other relevant features of the application, e.g.,
 
 
-API talk about API here
+**API** - talk about API here
 

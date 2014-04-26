@@ -8,8 +8,8 @@ namespace LoginExample.Controllers
 {
     public class HomeController : Controller
     {   
-        // anyone can anonymously view the index page
-        [AllowAnonymous]
+        
+        [Authorize]
         public ActionResult Index()
         {
             return View();

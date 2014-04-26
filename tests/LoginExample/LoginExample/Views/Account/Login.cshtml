@@ -4,15 +4,15 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
+
 <div class="row">
     @*log in section*@
-    <div class="col-md-8">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>@ViewBag.Title.</h2>
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
                 <hr />
                 @Html.ValidationSummary(true)
                 <div class="form-group">
@@ -47,15 +47,13 @@
                 </p>
             }
         </section>
-    </div>
-    @*Info section*@
-    <div class="col-md-4">
+        @*Info section*@
         <div class="alert alert-info">
             <h4>Problems accessing a page?</h4>
             <hr />
             @*All registered users need to be awarded 'AuthorizedUser' status, before they gain full access rights *@
             <p>If you have already registered, you may have to wait a 24hr grace period before being approved <b>Curator</b> status</p>
-        </div>
+        </div>   
     </div>
 </div>
 
