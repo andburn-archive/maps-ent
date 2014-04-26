@@ -19,6 +19,9 @@ Enterprise Frameworks Project
 15. Testing Approach (in terms of both functional and non-functional requirements)
 16. Other relevant features of the application
 
+*Saturday 26 April - Important to include*
+- Discuss any Patterns used
+- Project Plan - tasks who did what and when
 
 ------
 
