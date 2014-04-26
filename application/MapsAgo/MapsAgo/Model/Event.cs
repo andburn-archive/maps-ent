@@ -24,12 +24,16 @@ namespace MapsAgo.Model
         [StringLength(512)]
         public string Source { get; set; } 
 
+        // TODO: dates could be just Date type ?
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]        
         public DateTime StartDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
         // TODO: need to find out how to convert this for display
