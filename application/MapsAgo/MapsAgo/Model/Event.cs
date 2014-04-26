@@ -21,21 +21,26 @@ namespace MapsAgo.Model
 
         public string Description { get; set; }
 
+        [StringLength(512)]
         public string Source { get; set; } 
 
+        // TODO: dates could be just Date type ?
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]        
         public DateTime StartDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
         // TODO: need to find out how to convert this for display
         [Timestamp]
         public byte[] LastModified { get; set; }                 
 
-        // Links to other tables
+        // Foreign Keys and Navigation Properties
 
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }
@@ -43,7 +48,10 @@ namespace MapsAgo.Model
         public int EventTypeId { get; set; }
         public virtual EventType Type { get; set; }
 
-        public virtual ICollection<Medium> Media { get; set; }
+        public string ApplicationUserId { get; set; }
+        public virtual MapsAgo.Model.ApplicationUser User { get; set; }
+
+        public virtual ICollection<Resource> Resources { get; set; }
 
         // Link to User table is dealt with in 'IdentityModels.cs'
 

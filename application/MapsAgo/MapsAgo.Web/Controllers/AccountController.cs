@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+﻿using MapsAgo.Model;
+using MapsAgo.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using MapsAgo.Web.Models;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -16,7 +13,7 @@ namespace MapsAgo.Web.Controllers
     public class AccountController : Controller
     {
         public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new MapsAgoDbContext())))
         {
         }
 

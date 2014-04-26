@@ -36,6 +36,12 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -46,16 +52,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\MediaType.cs" />
+    <Compile Include="Common\ResourceType.cs" />
     <Compile Include="Data\IEventRepository.cs" />
     <Compile Include="Data\IEventTypeRepository.cs" />
     <Compile Include="Data\ILocationRepository.cs" />
     <Compile Include="Data\IMediaRepository.cs" />
+    <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\EventType.cs" />
     <Compile Include="Model\Location.cs" />
-    <Compile Include="Model\MapsAgoDb.cs" />
-    <Compile Include="Model\Medium.cs" />
+    <Compile Include="Model\MapsAgoDbContext.cs" />
+    <Compile Include="Model\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

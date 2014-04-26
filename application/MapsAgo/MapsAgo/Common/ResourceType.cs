@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Common
 {
-    public enum MediaType
+    public enum ResourceType
     {
         Image, Video, Audio, Link
     }

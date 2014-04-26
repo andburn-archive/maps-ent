@@ -5,6 +5,6 @@ namespace MapsAgo.Data
 {
     interface IMediaRepository
     {
-        IQueryable<Medium> MediaList { get; }
+        IQueryable<Resource> MediaList { get; }
     }
 }

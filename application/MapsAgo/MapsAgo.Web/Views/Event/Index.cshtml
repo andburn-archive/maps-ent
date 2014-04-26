@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MapsAgo.Model.Event>
 
 @{
-    ViewBag.Title = "All Events";
+    ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -11,8 +11,15 @@
 </p>
 <table class="table">
     <tr>
+
         <th>
             @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Type
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Excerpt)
@@ -28,6 +35,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type.Name)
+        </td>       
         <td>
             @Html.DisplayFor(modelItem => item.Excerpt)
         </td>

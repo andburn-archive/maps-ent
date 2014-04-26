@@ -12,12 +12,16 @@ namespace MapsAgo.Web.Controllers
 {
     public class EventController : Controller
     {
-        private MapsAgoDb db = new MapsAgoDb();
+        private MapsAgoDbContext db = new MapsAgoDbContext();
 
         // GET: /Event/
         public ActionResult Index()
         {
-            return View(db.Events.ToList());
+            var events = db.Events
+                .Include(e => e.Location)
+                .Include(e => e.Type)
+                .Include(e => e.User);
+            return View(events.ToList());
         }
 
         // GET: /Event/Details/5
@@ -31,13 +35,16 @@ namespace MapsAgo.Web.Controllers
             if (ev == null)
             {
                 return HttpNotFound();
-            }            
+            }
             return View(ev);
         }
 
         // GET: /Event/Create
         public ActionResult Create()
         {
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
             return View();
         }
 
@@ -46,16 +53,19 @@ namespace MapsAgo.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId")] Event @event)
+        public ActionResult Create([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId,ApplicationUserId")] Event ev)
         {
             if (ModelState.IsValid)
             {
-                db.Events.Add(@event);
+                db.Events.Add(ev);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(@event);
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            return View(ev);
         }
 
         // GET: /Event/Edit/5
@@ -65,12 +75,15 @@ namespace MapsAgo.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Event ev = db.Events.Find(id);
+            if (ev == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            return View(ev);
         }
 
         // POST: /Event/Edit/5
@@ -78,15 +91,18 @@ namespace MapsAgo.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId")] Event @event)
+        public ActionResult Edit([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId,ApplicationUserId")] Event ev)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(@event).State = EntityState.Modified;
+                db.Entry(ev).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(@event);
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            return View(ev);
         }
 
         // GET: /Event/Delete/5
@@ -96,12 +112,12 @@ namespace MapsAgo.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            Event ev = db.Events.Find(id);
+            if (ev == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(ev);
         }
 
         // POST: /Event/Delete/5
@@ -109,8 +125,8 @@ namespace MapsAgo.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
-            db.Events.Remove(@event);
+            Event ev = db.Events.Find(id);
+            db.Events.Remove(ev);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
