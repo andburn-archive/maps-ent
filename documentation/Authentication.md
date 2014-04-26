@@ -42,29 +42,87 @@ AuthorizedUser | **AuthorizedUser** are Data Curators who are concerned with sou
 Admin | The **Administrator** is the overarching owner of the application. This user is concerned with how the system works together and with managing and approving Data Curators (ApprovedUser).
 
 
- **Setting up roles w/ AuthorizeAttribute Class**
+
+
+
+###Setting up roles w/ AuthorizeAttribute Class###
+
+Change database config (write up later)
+
+Launch application, if database is not present setup the following users:
+
+	user: JoeSoap
+	password: testing
+	//role assigned PendingUser 
+
+	user: admin
+    password: testing
+	// role assigned admin
+
+	user: RegisteredJoe
+	password: testing
+	// role assigned AuthorizedUser
+
+**Step 0:**
+In the table **AspNetRoles** assign the following:
+
+id		| Name |
+---- 	| --- 
+1 | PendingUser|
+2| Admin|
+3 | AuthorizedUser|
+
+In the table **AspNetUserRoles** assign the following:
+
+Userid							| Name |
+---- 							| --- 
+<\id of an Admin user\> 		| 2	|
+<\id of an AuthorizedUser user\>| 3	|
+
+(note a PendingUser does not need to be assigned a role, as everyone who registers is assigned the PendingUser status by default (id 1) )
+
+
+**Step 1:**
+Add a filter to the `FilterConfig` file in the `App_Start folder`. 
+This filter will require a user to login to use the functionality of the web application.
+Add: `filters.Add(new AuthorizeAttribute());`
+
+**Step 2:**
+Add  `[Authorize]` to HomeController
 
  		//only authorized roles such as PendingUser, Admin and AuthorizedUser.
 		[Authorize]
-        public ActionResult Index()
-        {
-			ViewBag.Message = "This page gives a vague description of the application and user information about approval period";
-            return View();
-        }
+		public class HomeController : Controller
+		{
+			 //code ommitted
+		}
+
+**Step 3:**
+Add  ` [Authorize(Roles = "Admin , AuthorizedUser")]` to EventController
+		
 
 		//only the Admin and AuthorizedUser users can view the Events page
         [Authorize(Roles = "Admin , AuthorizedUser")]
-        public ActionResult Events()
+        public ActionResult Index()
         {
-            ViewBag.Message = "Your application description page.";
-			return View();
+           //code ommitted
         }
 
-        //only the admin should see this ApproveUser page
-        [Authorize(Roles = "Admin")]
-        public ActionResult ApproveUser()
-        {
-            ViewBag.Message = "Only the Admin should by able to ApproveUsers";
-            return View();
-        }
 		
+**Step 4:**  
+Update **_Layout.cshtml** to only show application links if the site user `isAuthenticated`
+		
+    @using Microsoft.AspNet.Identity
+    @if (Request.IsAuthenticated)
+    {
+    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+    <li>@Html.ActionLink("About", "About", "Home")</li>
+    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <li>@Html.ActionLink("Events", "Index", "Event")</li>
+    }
+    else
+    {
+    //no link options are dislayed
+    }
+
+

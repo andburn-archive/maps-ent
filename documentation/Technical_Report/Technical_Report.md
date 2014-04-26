@@ -168,7 +168,6 @@ maybe in the freebase section, as an example - andrew
 
 logging , and maybe auth?  - andrew seems to know about this 
 
-Authentication here? 
 CAn we speak about  Roles here?
 
 
@@ -192,6 +191,20 @@ That is why we have used strictly typed view.
 
 (Web Config?)
 (Could we speak about role, authentication here)
+
+	user: JoeSoap
+	password: testing
+	//role assigned PendingUser 
+
+	user: admin
+    password: testing
+	// role assigned admin
+
+	user: RegisteredJoe
+	password: testing
+	// role assigned AuthorizedUser
+
+
 
 ???
 ##14. Scalability of the application
