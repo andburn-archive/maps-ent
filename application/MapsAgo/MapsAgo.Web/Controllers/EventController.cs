@@ -13,8 +13,9 @@ namespace MapsAgo.Web.Controllers
     public class EventController : Controller
     {
         private MapsAgoDbContext db = new MapsAgoDbContext();
-
+        //only the Admin and AuthorizedUser users can view the Events page
         // GET: /Event/
+        [Authorize(Roles = "Admin , AuthorizedUser")]
         public ActionResult Index()
         {
             var events = db.Events

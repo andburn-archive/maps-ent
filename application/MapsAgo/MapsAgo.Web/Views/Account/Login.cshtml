@@ -6,7 +6,8 @@
 
 <h2>@ViewBag.Title.</h2>
 <div class="row">
-    <div class="col-md-8">
+    <!--Log in section-->
+    <div class="col-md-8 col-md-offset-2">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -46,12 +47,15 @@
                 </p>
             }
         </section>
+        <!-- Info section-->
+        <div class="alert alert-info">
+            <h4>Problems accessing a page?</h4>
+            <hr />
+            @*All registered users need to be awarded 'AuthorizedUser' status, before they gain full access rights *@
+            <p>If you have already registered, you may have to wait a 24hr grace period before being approved <b>Curator</b> status</p>
+        </div> 
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
