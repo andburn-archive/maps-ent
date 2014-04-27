@@ -1,14 +1,31 @@
-Enterprise Frameworks Project
+Enterprise Frameworks Project - maps-ent
 =======================
 
-Andrew 
-Fiona - 13121693
-Adam  - 
+An enterprise level application to manage the content for a map-based RIA and provide a Web API
 
+-------
+
+##About
+Enterprise Frameworks Project, MSc in Web Technologies (NCI)
+
+**Project Title**  | maps-ent
+:----------------- | :---------------------
+**Team Members**   | Andrew Burnett
+&nbsp;             | Adam Harrington
+&nbsp;             | Fiona McAndrew
+**Tutor**          | Vikas Sahni
+**Technologies**   | .NET MVC5 EF
+&nbsp;             | C#
+&nbsp;             | Azure
+**Source**         | https://github.com/andburn/maps-ent
+**URL**            | n/a
+**Licence**        | n/a
+
+
+Table of Contents
 ------
 1. Background research and investigations
 2. Project Plan
- - Due care should be taken to accurately record details of which team member was assigned responsibility for each activity
 3. Software development methodology employed o Requirements analysis
 4. Use cases
 5. Architecture/Design approach
@@ -36,24 +53,31 @@ Adam  -
 ##2. Project Plan
 
 
-Project plan see appendix I. This includes a description of all tasks identified and explained. It also shows resource allocation and timelines.
+Project plan see **appendix I**. This includes a description of all tasks identified and explained. It also shows resource allocation and timelines.
 
 
-##3. Software development methodology employed, requirements analysis
+##3. Software development methodology employed 
 Development Methodology
 
-### Waterfall ###
-(insert image of water here , image is created)
+### Waterfall SDLC ###
+
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon.png "Logo Title Text 1")  <- put waterfall screenshot here.
 
 
-1. **Requirement Gathering and analysis**: All possible requirements of the system to be developed are captured in this phase and documented in a requirement specification doc.
-1. **System Design**: The requirement specifications from first phase are studied in this phase and system design is prepared. System Design helps in specifying hardware and system requirements and also helps in defining overall system architecture.
-1. ** Implementation:** With inputs from system design, the system is first developed in small programs called units, which are integrated in the next phase. Each unit is developed and tested for its functionality which is referred to as Unit Testing.
-1. **Integration and Testing**: All the units developed in the implementation phase are integrated into a system after testing of each unit. Post integration the entire system is tested for any faults and failures.
-1. **Deployment** of system: Once the functional and non functional testing is done, the product is deployed in the customer environment or released into the market.
-1. **Maintenance**: There are some issues which come up in the client environment. To fix those issues patches are released. Also to enhance the product some better versions are released. Maintenance is done to deliver these changes in the customer environment.
+1. **Requirement Gathering and analysis**: 
+ - Project Scope is defined, 
+ - Requirements specification:
+ 	- Functional,
+ 	- Interface requirements,
+ 	- Documentation Requirement.
+1. **System Design**:
+ The requirement specifications from first phase are studied in this phase and system design is prepared. The System Architecture is defined, which will then inform the specification of the system's Data and Non-Functional Requirements.
+1. ** Implementation:** (TO DO)
+1. **Integration and Testing**: (TO DO)
+1. **Deployment** of system: Once the functional and non functional testing is done, the product is deployed.
+1. **Maintenance** - Out of scope for this project.
 
-### Waterfall Model Pros & Cons ###
+### Waterfall Model Pros & Cons ##
 
 | Pros                   				| Cons                 | 
 | --------------------------------------|-----------------------| 
@@ -68,36 +92,12 @@ Development Methodology
 [^1]: Test deployment was undertaken during the development phase, as the systems needed to be tested.
 (overlay a gantt chart)
 
-(Adam has done research on this)
-
-###Azure Deployment - Move to another section.
-
-For information regarding azure "virtual machine" vs. "websites" see disambiguation [here][azure-lingo]. The key points were that websites are platform as a service while virtual machines are like AWS EC2 and have to be configured manually. Websites suit us.
-
-To start a new project with Azure already connected the procedure is as follows:
-
-Process: `new project`[^1] -> `Check azure option` -> `choose websites` ->
-
-[^!1]: New .NET 4.5.1 MVC5 with API and unit tests 
-
-###ASP.NET Web API 2
-(NOTES from tutorial ,write to fit doc)
-
-[Tutorial](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)
-
-
-"A model is an object that represents the data in your application. 
-
-ASP.NET Web API can automatically serialize your model to JSON, XML, or some other format, and then write the serialized data into the body of the HTTP response message. 
-
-As long as a client can read the serialization format, it can deserialize the object.
-
- Most clients can parse either XML or JSON. Moreover, the client can indicate which format it wants by setting the Accept header in the HTTP request message."
+## Requirements Analysis ##
 
 
 ##4. Use cases
 
-(Alter user requirements) - asssign to fiona - fella to review
+(Alter user requirements) - asssign to fiona - fellas to review
 ??
 
 
@@ -210,7 +210,36 @@ That is why we have used strictly typed view.
 ##14. Scalability of the application
 
 ??
+
+
 (Azure, cloud scability)
+
+(Adam has done research on this)
+
+###Azure Deployment - Move to another section.
+
+For information regarding azure "virtual machine" vs. "websites" see disambiguation [here][azure-lingo]. The key points were that websites are platform as a service while virtual machines are like AWS EC2 and have to be configured manually. Websites suit us.
+
+To start a new project with Azure already connected the procedure is as follows:
+
+Process: `new project`[^1] -> `Check azure option` -> `choose websites` ->
+
+[^!1]: New .NET 4.5.1 MVC5 with API and unit tests 
+
+###ASP.NET Web API 2
+(NOTES from tutorial ,write to fit doc)
+
+[Tutorial](http://www.asp.net/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)
+
+
+"A model is an object that represents the data in your application. 
+
+ASP.NET Web API can automatically serialize your model to JSON, XML, or some other format, and then write the serialized data into the body of the HTTP response message. 
+
+As long as a client can read the serialization format, it can deserialize the object.
+
+ Most clients can parse either XML or JSON. Moreover, the client can indicate which format it wants by setting the Accept header in the HTTP request message."
+
 
 ##15. Testing Approach (in terms of both functional and non-functional requirements)
 
