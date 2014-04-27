@@ -61,8 +61,7 @@ Development Methodology
 
 ### Waterfall SDLC ###
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon.png "Logo Title Text 1")  <- put waterfall screenshot here.
-
+![alt text](https://raw.githubusercontent.com/andburn/maps-ent/master/documentation/Technical_Report/screenshots/waterfall.PNG?token=5261006__eyJzY29wZSI6IlJhd0Jsb2I6YW5kYnVybi9tYXBzLWVudC9tYXN0ZXIvZG9jdW1lbnRhdGlvbi9UZWNobmljYWxfUmVwb3J0L3NjcmVlbnNob3RzL3dhdGVyZmFsbC5QTkciLCJleHBpcmVzIjoxMzk5MjA0ODUzfQ%3D%3D--ac20269e8e4b72818ca8d55dccba17c51112650b "Waterfall SDLC") 
 
 1. **Requirement Gathering and analysis**: 
  - Project Scope is defined, 
