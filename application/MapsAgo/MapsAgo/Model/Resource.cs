@@ -25,9 +25,13 @@ namespace MapsAgo.Model
         [StringLength(2048)]
         public string Url { get; set; }
 
+        // (http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ;,./?%&=]*)?
+
         public string Description { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
 
+
+        public bool IsValid { get; set; }
     }
 }

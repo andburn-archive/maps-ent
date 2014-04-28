@@ -14,7 +14,7 @@ namespace MapsAgo.Tests.Controllers
     public class EventsControllerTest
     {
         [TestMethod]
-        public void DetailsAction_Should_Return_View_For_ExistingDinner()
+        public void DetailsAction_Should_Return_View_For_ExistingEvent()
         {
 
             //// Arrange
@@ -28,7 +28,7 @@ namespace MapsAgo.Tests.Controllers
         }
 
         [TestMethod]
-        public void DetailsAction_Should_Return_NotFoundView_For_BogusDinner()
+        public void DetailsAction_Should_Return_NotFoundView_For_FakeEvent()
         {
 
             //// Arrange

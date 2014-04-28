@@ -235,6 +235,8 @@ Forms Authentication  was choosen as the most appropriate Authentication impleme
 
 ### Roles ###
 
+(Andrew has diagram of database)
+
 This web application requires users to register and be approved by an admin before the users are granted access to site.
 
 There are 3 types of roles in this application.
@@ -300,7 +302,6 @@ Add  `[Authorize]` to HomeController
 
 **Step 3:**
 Add  ` [Authorize(Roles = "Admin , AuthorizedUser")]` to EventController
-		
 
 		//only the Admin and AuthorizedUser users can view the Events page
         [Authorize(Roles = "Admin , AuthorizedUser")]
@@ -325,11 +326,6 @@ Update **_Layout.cshtml** to only show application links if the site user `isAut
     {
     //no link options are dislayed
     }
-
-
-
-
-
 ???
 ##14. Scalability of the application
 

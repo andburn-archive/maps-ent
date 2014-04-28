@@ -5,7 +5,6 @@ Unit testing are vital in the creation of a enterprise level web application, as
 There is also long time benifits of testing as they insure that changes to the code don't indvertently affect other parts of the system.
 
 
-
 > "In an ASP.NET MVC application, controllers will interact with services or repositories to handle each request. As each piece is built, these interactions can be tested using unit tests to instill confidence that the system continues to work as new features are added or new versions of dependent libraries are supplied." (http://msdn.microsoft.com/en-us/library/hh404088.aspx#sec8)
 
 ### Setting up Unit Tests ###
