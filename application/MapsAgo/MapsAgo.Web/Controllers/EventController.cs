@@ -67,7 +67,7 @@ namespace MapsAgo.Web.Controllers
 
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
             return View(ev);
         }
 
@@ -123,7 +123,7 @@ namespace MapsAgo.Web.Controllers
             }
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
             return View(ev);
         }
 
@@ -142,7 +142,7 @@ namespace MapsAgo.Web.Controllers
             }
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
+            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
             return View(ev);
         }
 
