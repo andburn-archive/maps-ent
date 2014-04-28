@@ -14,6 +14,9 @@ namespace MapsAgo.Web.Migrations
     using System.Globalization;
     using System.Linq;
     using System.Text;
+    using System.Management;
+    using System.Web.Security;
+    using MapsAgo.Web.Controllers;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MapsAgo.Model.MapsAgoDbContext>
     {
@@ -24,6 +27,52 @@ namespace MapsAgo.Web.Migrations
 
         protected override void Seed(MapsAgo.Model.MapsAgoDbContext context)
         {
+            // Microsoft.AspNet.Identity
+            // UserManagerExtensions
+            // AddToRole<TUser, TKey>
+
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+            if (!RoleManager.RoleExists("Admin"))
+            {
+                RoleManager.Create( new IdentityRole("Admin"));
+            }
+            if (!RoleManager.RoleExists("Pending"))
+            {
+                RoleManager.Create( new IdentityRole("Pending"));
+            }
+            if (!RoleManager.RoleExists("AuthorizedUser"))
+            {
+                RoleManager.Create(new IdentityRole("AuthorizedUser"));
+            }
+
+            string name = "Admin";
+            string password = "password";
+
+            var user = new ApplicationUser() { UserName = name };
+            var adminresult = UserManager.Create(user, password);
+
+            if (adminresult.Succeeded)
+            {
+                var result = UserManager.AddToRole(user.Id, "Admin");
+            }
+
+
+            string name2 = "testuser";
+            string password2 = "password";
+
+            var user2 = new ApplicationUser() { UserName = name2 };
+            var adminresult2 = UserManager.Create(user2, password2);
+
+            if (adminresult.Succeeded)
+            {
+                var result2 = UserManager.AddToRole(user2.Id, "AuthorizedUser");
+            }
+
+
+
+            
             var EventTypes = new List<EventType> {
                 new EventType { Name = "Battles" },
                 new EventType { Name = "Default" }
@@ -101,5 +150,6 @@ namespace MapsAgo.Web.Migrations
             context.Locations.AddOrUpdate(r => r.Name, LocList.ToArray());
 
         }
+    
     }
 }
