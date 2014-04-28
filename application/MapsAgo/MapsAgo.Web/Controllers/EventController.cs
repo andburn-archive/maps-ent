@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MapsAgo.Model;
+using MapsAgo.Web.ViewModels;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -67,6 +68,44 @@ namespace MapsAgo.Web.Controllers
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
             return View(ev);
+        }
+
+        public ActionResult CreateFull()
+        {
+
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateFull(NewEventViewModel newEvent)
+        {
+            if (ModelState.IsValid)
+            {
+                Event e = newEvent.MapToEvent();
+                Location l = newEvent.MapToLocation();
+
+
+                db.Locations.Add(l);
+
+                e.Location = l;
+                e.LocationId = l.Id;
+
+                db.Events.Add(e);
+
+                db.SaveChanges();
+
+
+
+                return RedirectToAction("Details", "Event", new { id = e.Id });
+            }
+
+
+            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
+            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
+            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
+            return View();
         }
 
         // GET: /Event/Edit/5
