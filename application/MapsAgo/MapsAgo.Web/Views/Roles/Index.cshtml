@@ -18,21 +18,23 @@
     @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserName)
+            @Html.DisplayFor(modelItem => item.UserName)            
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Roles)
-        </td>
-        <td>
-        <div class="form-group">
+            @foreach (var i in item.Roles) {
+                <td>
+                @Html.DisplayFor(r => i.RoleId)
+                </td>
+            }
+    </tr>
+    }
+</table>
+<!--
+            <div class="form-group">
             @*Html.LabelFor(model => model.Roles, "Roles", new { @class = "control-label col-md-2" })*@
-            Roles
             <div class="col-md-10">
-                @Html.DropDownList("RoleList", String.Empty)
+                @*Html.DropDownList("RoleList", "None")
                 @*Html.ValidationMessageFor(modelItem => item.Roles)*@
             </div>
         </div>
         </td>
-    </tr>
-    }
-</table>
+-->
