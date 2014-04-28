@@ -48,12 +48,9 @@ namespace MapsAgo.Model
         public int EventTypeId { get; set; }
         public virtual EventType Type { get; set; }
 
-        public string ApplicationUserId { get; set; }
-        public virtual MapsAgo.Model.ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Resource> Resources { get; set; }
-
-        // Link to User table is dealt with in 'IdentityModels.cs'
 
     }
 }
