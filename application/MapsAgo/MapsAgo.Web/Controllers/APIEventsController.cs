@@ -20,7 +20,7 @@ namespace MapsAgo.Web.Controllers
 
         // Public Actions
 
-        // http://localhost:50931/api/4/5/6?startdate=01-01-1560&enddate=01-01-1950
+        // $.getJSON("http://localhost:9190/api/5/5/5?startdate=01-01-1560&enddate=01-01-1950", function(data){g=$.parseJSON(data);console.log(g)})
         [Route("api/{zoom}/{lat}/{lon}")]
         [HttpGet]
         public IHttpActionResult GetClosest(int zoom, Double lat, Double lon, string startdate, string enddate)
@@ -130,20 +130,8 @@ namespace MapsAgo.Web.Controllers
 
             JavaScriptSerializer s = new JavaScriptSerializer();
 
-            var l2 = db.Locations.Find(results.First().LocationId);
-
-            var hi = "hi";
-
-
-
             foreach (var result in results)
             {
-                var tmp = result.LocationId;
-                var tmpLookup = (from locs in db.Locations
-                            where locs.Id == tmp
-                            select locs).First();
-                
-                var t2 = result.Location;
                 Object l = new { 
                     Latitude = result.Location.Coordinates.Latitude,
                     Longitude = result.Location.Coordinates.Longitude
