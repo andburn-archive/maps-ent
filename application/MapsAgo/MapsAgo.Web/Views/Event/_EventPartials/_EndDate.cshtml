@@ -1,0 +1,17 @@
+﻿@model MapsAgo.Web.ViewModels.NewEventViewModel
+
+<div class="form-group date">
+    <label class="control-label col-md-4" for="EventEndYear">End Date</label>
+    <div class="col-md-2">
+        @Html.TextBox("EventEndDay", null, new { @class = "form-control", type = "number", placeholder = "Day" })
+        @Html.ValidationMessageFor(model => model.EventEndDay)
+    </div>
+    <div class="col-md-2">
+        @Html.TextBox("EventEndMonth", null, new { @class = "form-control", type = "number", placeholder = "Month" })
+        @Html.ValidationMessageFor(model => model.EventEndMonth)
+    </div>
+    <div class="col-md-4">
+        @Html.TextBox("EventEndYear", null, new { @class = "form-control", type = "number", placeholder = "Year" })
+        @Html.ValidationMessageFor(model => model.EventEndYear)
+    </div>
+</div>

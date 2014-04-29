@@ -62,38 +62,29 @@ namespace MapsAgo.Web.Migrations
 
         }
 
-        private ApplicationUser InitializeUserData(MapsAgoDbContext context)
-        {         
+        private ApplicationUser InitializeUserData(MapsAgoDbContext context,
+            String username, String rolename, String password)
+        {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            // Set default Admin details
-            string adminRole = "Admin";
-            string adminName = "Admin";
-            string adminPassword = "123456";
-            // Set authorized user role
-            string authUser = "AuthorizedUser";
 
-            // Create the Admin role, unless already exists
-            if (!RoleManager.RoleExists(adminRole))
+
+            // Create the role, unless it already exists
+            if (!RoleManager.RoleExists(rolename))
             {
-                var roleresult = RoleManager.Create(new IdentityRole(adminRole));
-            }
-            // Create the Authorized user role, unless already exists
-            if (!RoleManager.RoleExists(authUser))
-            {
-                var roleresult = RoleManager.Create(new IdentityRole(authUser));
+                var roleResult = RoleManager.Create(new IdentityRole(rolename));
             }
 
-            // Actually create Admin user
+            // Actually create user
             var user = new ApplicationUser();
-            user.UserName = adminName;
-            var adminResult = UserManager.Create(user, adminPassword);
+            user.UserName = username;
+            var userResult = UserManager.Create(user, password);
 
-            // Add Admin to Admin role
-            if (adminResult.Succeeded)
+            // Add User to role
+            if (userResult.Succeeded)
             {
-                var result = UserManager.AddToRole(user.Id, adminRole);
+                var result = UserManager.AddToRole(user.Id, rolename);
             }
 
             // return user to assign it to seed events
@@ -103,7 +94,8 @@ namespace MapsAgo.Web.Migrations
     
         protected override void Seed(MapsAgo.Model.MapsAgoDbContext context)
         {
-            var user = InitializeUserData(context);
+            var userAdmin = InitializeUserData(context, "Admin", "Admin", "123456");
+            var userAuthorized = InitializeUserData(context, "AuthorizedUser", "AuthorizedUser", "123456");
 
             var EventTypes = new List<EventType> {
                 new EventType { Id = 1, Name = "Unknown" },
@@ -156,7 +148,7 @@ namespace MapsAgo.Web.Migrations
                     DateCreated = new DateTime(2013, 2, 1),
                     EventTypeId = 2,
                     LocationId = 1,
-                    User = user
+                    User = userAdmin
                 },
                 new Event
                 {
@@ -169,7 +161,7 @@ namespace MapsAgo.Web.Migrations
                     DateCreated = new DateTime(2014, 1, 10),
                     EventTypeId = 2,
                     LocationId = 2,
-                    User = user
+                    User = userAdmin
                 },
                 new Event
                 {
@@ -183,7 +175,7 @@ namespace MapsAgo.Web.Migrations
                     Resources = Resources,
                     EventTypeId = 1,
                     LocationId = 2,
-                    User = user
+                    User = userAuthorized
                 }
             };
 
