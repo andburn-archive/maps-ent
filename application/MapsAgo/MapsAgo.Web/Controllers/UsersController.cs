@@ -66,30 +66,41 @@ namespace MapsAgo.Web.Controllers
 
         //
         // GET: /Users/Details/5
-        public ActionResult Details(string UserName)
+        public ActionResult Details(string id)
         {
-            ApplicationUser user = UserManager.FindByName(UserName);
+            // TODO: can this even be null?
+            if (id == null)
+            {
+                return RedirectToAction("Index");
+            }
 
-            IQueryable<ApplicationUser> users = UserManager.Users;
+            ApplicationUser user = UserManager.FindById(id);           
+
+            if (user == null)
+            {
+                return new HttpNotFoundResult("This user does not exist");
+            }
+
+            IEnumerable<string> userRoleIds = user.Roles.Select(x => x.RoleId);                             
+
             IQueryable<IdentityRole> roles = RoleManager.Roles;
+
+            IEnumerable<string> allRoleIds = roles.Select(x => x.Id);
+            IEnumerable<string> commonRoles = allRoleIds.Intersect(userRoleIds);
 
             IEnumerable<EventItemViewModel> uevents = 
                 from e in user.Events
-                select new EventItemViewModel
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    Excerpt = e.Excerpt,
-                    Date = e.StartDate.Date
-                };
-            IEnumerable<RoleItemViewModel> uroles = 
+                select new EventItemViewModel(e);
+
+            // TODO: do we want to include Admin assignable to Users?
+            IEnumerable<RoleItemViewModel> uroles =
                 from r in roles
-                where r.Name != RoleType.Admin.ToString()
+                //where r.Name != RoleType.Admin.ToString()
                 select new RoleItemViewModel
                 {
                     Id = r.Id,
                     Name = r.Name,
-                    Checked = user.Roles.Any(x => x.RoleId == r.Id)
+                    Checked = commonRoles.Contains(r.Id)
                 };
 
             return View(new UserDetailViewModel { 

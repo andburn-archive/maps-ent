@@ -1,0 +1,27 @@
+﻿@model MapsAgo.Web.ViewModels.EventItemViewModel
+
+<tr>
+    <td>
+        @Html.DisplayFor(x => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(x => Model.Excerpt)
+    </td>
+    <td>
+        @Html.DisplayFor(x => Model.Date)
+    </td>
+    <td>
+        @if (Model.Flagged) {
+            <span class="glyphicon glyphicon-flag"
+                  style="color: red"></span>
+        } else {
+            <span class="glyphicon glyphicon-flag"
+                style="color: lightgray"></span>
+        }
+    </td>
+    <td>
+        @Html.ActionLink("View", "Details", "Event", 
+            new {  id = Model.Id },
+            new { @class = "btn btn-default btn-xs" })
+    </td>
+</tr>

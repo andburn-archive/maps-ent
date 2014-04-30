@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MapsAgo.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -19,10 +20,22 @@ namespace MapsAgo.Web.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Excerpt { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
+        public bool Flagged { get; set; }
+
+        public EventItemViewModel() {}
+
+        public EventItemViewModel(Event e)
+        {
+            Id = e.Id;
+            Name = e.Name;
+            Excerpt = e.Excerpt;
+            Date = e.StartDate.Date;
+            Flagged = e.Flagged;
+        }        
     }
-    
+       
     public class UserListViewModel
     {
         public string Id { get; set; }
@@ -30,12 +43,14 @@ namespace MapsAgo.Web.ViewModels
         public string UserName { get; set; }
         public string Email { get; set; }
         public bool Authorized { get; set; }
-        [DisplayName("Contributed Events")]
+        [DisplayName("Events")]
         public int NumberOfEvents { get; set; }
-        [DisplayName("Events Flagged")]
+        [DisplayName("Flagged")]
         public int FlaggedEvents { get; set; }
     }
 
+    // TODO: need to see what else going to include here
+    // relates to register login etc.
     public class UserDetailViewModel
     {
         public string Id { get; set; }

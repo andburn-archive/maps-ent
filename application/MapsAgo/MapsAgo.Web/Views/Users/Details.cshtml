@@ -30,12 +30,25 @@
 </div>
 
 <div>
-    @foreach (var ur in Model.UserRoles) {
-        @Html.EditorFor(x => ur)
-    }
+    @Html.EditorFor(model => model.UserRoles)
 </div>
+
 
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<h2>Events</h2>
+<table class="table">
+    <tr>
+        <!-- TODO: better to have these dynamic -->
+        <th>Name</th>
+        <th>Excerpt</th>
+        <th>Date</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @Html.DisplayFor(model => model.UserEvents)
+</table>
+

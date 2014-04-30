@@ -267,13 +267,14 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\EditorTemplates\RoleItemViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RoleItemViewModel.cshtml" />
     <Content Include="Views\Event\CreateFull.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\Delete.cshtml" />
     <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EventItemViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
