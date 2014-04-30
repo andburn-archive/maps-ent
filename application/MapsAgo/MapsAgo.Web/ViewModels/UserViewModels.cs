@@ -20,7 +20,7 @@ namespace MapsAgo.Web.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Excerpt { get; set; }
-        [DisplayFormat(DataFormatString = "{0:MMM yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
         public bool Flagged { get; set; }
 

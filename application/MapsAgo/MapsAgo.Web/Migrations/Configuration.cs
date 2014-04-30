@@ -16,56 +16,8 @@ namespace MapsAgo.Web.Migrations
             AutomaticMigrationsEnabled = true;
         }
 
-
-		private void something() {
-            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            //var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-            //if (!RoleManager.RoleExists("Admin"))
-            //{
-            //    RoleManager.Create( new IdentityRole("Admin"));
-            //}
-            //if (!RoleManager.RoleExists("Pending"))
-            //{
-            //    RoleManager.Create( new IdentityRole("Pending"));
-            //}
-            //if (!RoleManager.RoleExists("AuthorizedUser"))
-            //{
-            //    RoleManager.Create(new IdentityRole("AuthorizedUser"));
-            //}
-
-            //string name = "Admin";
-            //string password = "password";
-
-            //var user = new ApplicationUser() { UserName = name };
-            //var adminresult = UserManager.Create(user, password);
-
-            //if (adminresult.Succeeded)
-            //{
-            //    var result = UserManager.AddToRole(user.Id, "Admin");
-            //}
-
-
-            //string name2 = "testuser";
-            //string password2 = "password";
-
-            //var user2 = new ApplicationUser() { UserName = name2 };
-            //var adminresult2 = UserManager.Create(user2, password2);
-
-            //if (adminresult.Succeeded)
-            //{
-            //    var result2 = UserManager.AddToRole(user2.Id, "AuthorizedUser");
-            //}
-
-        }
-
-        private ApplicationUser CreateUser(string username, string password, string role)
-        {
-            return null;
-        }
-
         private ApplicationUser[] InitializeUserData(MapsAgoDbContext context)
-        {         
+        {
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
@@ -75,7 +27,7 @@ namespace MapsAgo.Web.Migrations
             string defaultRole = RoleType.Default.ToString();
 
             // Create the roles
-            foreach ( var role in Enum.GetNames(typeof(RoleType)) )
+            foreach (var role in Enum.GetNames(typeof(RoleType)))
             {
                 if (!RoleManager.RoleExists(role))
                 {
@@ -85,39 +37,15 @@ namespace MapsAgo.Web.Migrations
 
             // Set default Admin details
             string adminName = "Admin";
-            string adminPassword = "123456";                       
+            string adminPassword = "123456";
             // Actually create Admin user
             var user = new ApplicationUser();
             user.UserName = adminName;
             var adminResult = UserManager.Create(user, adminPassword);
             // Add Admin to Admin role
-            //if (adminResult.Succeeded)
-			return null;
-		}
-		
-        private ApplicationUser InitializeUserData(MapsAgoDbContext context,
-            String username, String rolename, String password)
-        {
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-
-
-            // Create the role, unless it already exists
-            if (!RoleManager.RoleExists(rolename))
+            if (adminResult.Succeeded)
             {
-                var roleResult = RoleManager.Create(new IdentityRole(rolename));
-            }
-
-            // Actually create user
-            var user = new ApplicationUser();
-            user.UserName = username;
-            var userResult = UserManager.Create(user, password);
-
-            // Add User to role
-            if (userResult.Succeeded)
-            {
-                var result = UserManager.AddToRole(user.Id, rolename);
+                UserManager.AddToRole(user.Id, adminRole);
             }
 
             // Add some extra users
@@ -148,17 +76,14 @@ namespace MapsAgo.Web.Migrations
                 UserManager.AddToRole(user3.Id, authRole);
             }
 
-            // return user to assign it to seed events
-            return new ApplicationUser[]{ user1, user2, user3 };
+            // return users to assign it to seed events
+            return new ApplicationUser[] { user1, user2, user3 };
         }
 
-    
+
         protected override void Seed(MapsAgo.Model.MapsAgoDbContext context)
         {
             var users = InitializeUserData(context);
-
-            //var userAdmin = InitializeUserData(context, "Admin", "Admin", "123456");
-            //var userAuthorized = InitializeUserData(context, "AuthorizedUser", "AuthorizedUser", "123456");
 
             var EventTypes = new List<EventType> {
                 new EventType { Id = 1, Name = "Unknown" },
@@ -209,6 +134,7 @@ namespace MapsAgo.Web.Migrations
                     StartDate = new DateTime(1520, 11, 7),
                     EndDate = new DateTime(1520, 11, 10),
                     DateCreated = new DateTime(2013, 2, 1),
+                    Resources = new List<Resource> {Resources[1]},
                     EventTypeId = 2,
                     LocationId = 1,
                     Flagged = false,
@@ -223,6 +149,7 @@ namespace MapsAgo.Web.Migrations
                     StartDate = new DateTime(1810, 9, 16),
                     EndDate = new DateTime(1821,1, 2),
                     DateCreated = new DateTime(2014, 1, 10),
+                    Resources = new[] {Resources[0]},
                     EventTypeId = 2,
                     LocationId = 2,
                     Flagged = true,
@@ -250,7 +177,7 @@ namespace MapsAgo.Web.Migrations
             context.Resources.AddOrUpdate(r => r.Name, Resources.ToArray());
             context.Events.AddOrUpdate(r => r.Name, Events.ToArray());
         }
-    
+
     }
 
 }

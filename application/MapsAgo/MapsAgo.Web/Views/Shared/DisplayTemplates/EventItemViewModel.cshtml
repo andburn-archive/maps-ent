@@ -2,6 +2,18 @@
 
 <tr>
     <td>
+        @if (Model.Flagged)
+        {
+            <span class="glyphicon glyphicon-flag"
+                  style="color: red"></span>
+        }
+        else
+        {
+            <span class="glyphicon glyphicon-flag"
+                  style="color: lightgray"></span>
+        }
+    </td>
+    <td>
         @Html.DisplayFor(x => Model.Name)
     </td>
     <td>
@@ -9,15 +21,6 @@
     </td>
     <td>
         @Html.DisplayFor(x => Model.Date)
-    </td>
-    <td>
-        @if (Model.Flagged) {
-            <span class="glyphicon glyphicon-flag"
-                  style="color: red"></span>
-        } else {
-            <span class="glyphicon glyphicon-flag"
-                style="color: lightgray"></span>
-        }
     </td>
     <td>
         @Html.ActionLink("View", "Details", "Event", 
