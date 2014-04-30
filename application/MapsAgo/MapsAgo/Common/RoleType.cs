@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Common
 {
-    public enum AuthTypes
+    // keeps user Role names in one place
+    public enum RoleType
     {
-        Admin, 
+        Admin,
         Authorized,
         Default
     }

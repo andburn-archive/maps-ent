@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace MapsAgo.Web.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [AuthorizeByRole(RoleType.Admin)]
     public class UsersController : Controller
     {
 
@@ -40,9 +40,9 @@ namespace MapsAgo.Web.Controllers
             IQueryable<IdentityRole> roles = RoleManager.Roles;
 
             IdentityRole AuthRole = 
-                RoleManager.FindByName(AuthTypes.Authorized.ToString());
+                RoleManager.FindByName(RoleType.Authorized.ToString());
             IdentityRole AdminRole =
-                RoleManager.FindByName(AuthTypes.Admin.ToString());
+                RoleManager.FindByName(RoleType.Admin.ToString());
 
             // TODO: users without roles will not show, 
             // must ensure all users are assigned roles
@@ -84,7 +84,7 @@ namespace MapsAgo.Web.Controllers
                 };
             IEnumerable<RoleItemViewModel> uroles = 
                 from r in roles
-                where r.Name != AuthTypes.Admin.ToString()
+                where r.Name != RoleType.Admin.ToString()
                 select new RoleItemViewModel
                 {
                     Id = r.Id,

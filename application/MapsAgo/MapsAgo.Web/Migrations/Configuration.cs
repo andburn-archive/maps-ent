@@ -73,22 +73,17 @@ namespace MapsAgo.Web.Migrations
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
             // Add user roles types, uses AuthTypes enum            
-            string adminRole = AuthTypes.Admin.ToString();
-            string authRole = AuthTypes.Authorized.ToString();
-            string defaultRole = AuthTypes.Default.ToString();
+            string adminRole = RoleType.Admin.ToString();
+            string authRole = RoleType.Authorized.ToString();
+            string defaultRole = RoleType.Default.ToString();
 
             // Create the roles
-            if (!RoleManager.RoleExists(adminRole))
+            foreach ( var role in Enum.GetNames(typeof(RoleType)) )
             {
-                var roleresult = RoleManager.Create(new IdentityRole(adminRole));
-            }
-            if (!RoleManager.RoleExists(authRole))
-            {
-                var roleresult = RoleManager.Create(new IdentityRole(authRole));
-            }
-            if (!RoleManager.RoleExists(defaultRole))
-            {
-                var roleresult = RoleManager.Create(new IdentityRole(defaultRole));
+                if (!RoleManager.RoleExists(role))
+                {
+                    RoleManager.Create(new IdentityRole(role));
+                }
             }
 
             // Set default Admin details

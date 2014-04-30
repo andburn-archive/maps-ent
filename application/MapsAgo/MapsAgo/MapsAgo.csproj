@@ -45,6 +45,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,7 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\AuthTypes.cs" />
+    <Compile Include="Common\AuthorizeByRole.cs" />
+    <Compile Include="Common\RoleType.cs" />
     <Compile Include="Common\ResourceType.cs" />
     <Compile Include="Data\IEventRepository.cs" />
     <Compile Include="Data\IEventTypeRepository.cs" />
