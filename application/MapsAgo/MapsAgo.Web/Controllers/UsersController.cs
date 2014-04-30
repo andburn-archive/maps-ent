@@ -1,4 +1,5 @@
-﻿using MapsAgo.Model;
+﻿using MapsAgo.Common;
+using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -37,102 +38,72 @@ namespace MapsAgo.Web.Controllers
         {
             IQueryable<ApplicationUser> users = UserManager.Users;            
             IQueryable<IdentityRole> roles = RoleManager.Roles;
-            
-            //ICollection<UserListViewModel> userList = new List<UserListViewModel>();
 
-            // TODO: must be a better way to do this, LINQ?
-            //foreach (var u in users)
-            //{
-            //    var udvm = new UserListViewModel
-            //    {
-            //        Id = u.Id,
-            //        UserName = u.UserName,
-            //        Email = u.Email
-            //    };
-            //    var rivm = new List<RoleItemViewModel>();
-            //    foreach (var r in roles)
-            //    {
-            //        rivm.Add(new RoleItemViewModel
-            //        {
-            //            Id = r.Id,
-            //            Name = r.Name,
-            //            Checked = u.Roles.Any(x => x.RoleId == r.Id)
-            //        });                    
-            //    }
-            //    udvm.UserRoles = rivm;
-            //    userList.Add(udvm);
-            //}
+            IdentityRole AuthRole = 
+                RoleManager.FindByName(AuthTypes.Authorized.ToString());
+            IdentityRole AdminRole =
+                RoleManager.FindByName(AuthTypes.Admin.ToString());
 
-            // Test values for view
-            var userList = new List<UserListViewModel>
-            {
-                new UserListViewModel {
-                    Id = "100", UserName = "Joe", Email = "joe@e.com",
-                    UserRoles = new List<RoleItemViewModel> {
-                        new RoleItemViewModel {
-                            Id = "200", Name = "Auth", Checked = true
-                        },
-                        new RoleItemViewModel {
-                            Id = "210", Name = "Admin", Checked = false
-                        },
-                        new RoleItemViewModel {
-                            Id = "220", Name = "None", Checked = false
-                        }
-                    }
-                },
-                new UserListViewModel {
-                    Id = "110", UserName = "Bill", Email = "bill@e.com",
-                    UserRoles = new List<RoleItemViewModel> {
-                        new RoleItemViewModel {
-                            Id = "200", Name = "Auth", Checked = true
-                        },
-                        new RoleItemViewModel {
-                            Id = "210", Name = "Admin", Checked = true
-                        },
-                        new RoleItemViewModel {
-                            Id = "220", Name = "None", Checked = false
-                        }
-                    }
-                },
-            };
+            // TODO: users without roles will not show, 
+            // must ensure all users are assigned roles
+            var list = from u in users
+                       from r in u.Roles
+                       where r.RoleId != AdminRole.Id
+                       select new UserListViewModel
+                       {
+                           Id = u.Id,
+                           UserName = u.UserName,
+                           Email = u.Email,
+                           NumberOfEvents = u.Events.Count(),
+                           FlaggedEvents = (from e in u.Events
+                                            where e.Flagged
+                                            select e).Count(),
+                           Authorized = r.RoleId == AuthRole.Id
+                       };
 
-            return View(userList);
+            return View(list);
         }
 
         //
         // GET: /Users/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string UserName)
         {
-            return View();
+            ApplicationUser user = UserManager.FindByName(UserName);
+
+            IQueryable<ApplicationUser> users = UserManager.Users;
+            IQueryable<IdentityRole> roles = RoleManager.Roles;
+
+            IEnumerable<EventItemViewModel> uevents = 
+                from e in user.Events
+                select new EventItemViewModel
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Excerpt = e.Excerpt,
+                    Date = e.StartDate.Date
+                };
+            IEnumerable<RoleItemViewModel> uroles = 
+                from r in roles
+                where r.Name != AuthTypes.Admin.ToString()
+                select new RoleItemViewModel
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Checked = user.Roles.Any(x => x.RoleId == r.Id)
+                };
+
+            return View(new UserDetailViewModel { 
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                UserRoles = uroles,
+                UserEvents = uevents
+            });  
         }
-
-        //
-        // GET: /Users/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Users/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        
         //
         // GET: /Users/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             return View();
         }

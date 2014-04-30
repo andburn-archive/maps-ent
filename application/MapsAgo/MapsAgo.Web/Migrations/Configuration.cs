@@ -62,48 +62,84 @@ namespace MapsAgo.Web.Migrations
 
         }
 
-        private ApplicationUser InitializeUserData(MapsAgoDbContext context)
+        private ApplicationUser CreateUser(string username, string password, string role)
+        {
+            return null;
+        }
+
+        private ApplicationUser[] InitializeUserData(MapsAgoDbContext context)
         {         
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            // Set default Admin details
-            string adminRole = "Admin";
-            string adminName = "Admin";
-            string adminPassword = "123456";
-            // Set authorized user role
-            string authUser = "AuthorizedUser";
+            // Add user roles types, uses AuthTypes enum            
+            string adminRole = AuthTypes.Admin.ToString();
+            string authRole = AuthTypes.Authorized.ToString();
+            string defaultRole = AuthTypes.Default.ToString();
 
-            // Create the Admin role, unless already exists
+            // Create the roles
             if (!RoleManager.RoleExists(adminRole))
             {
                 var roleresult = RoleManager.Create(new IdentityRole(adminRole));
             }
-            // Create the Authorized user role, unless already exists
-            if (!RoleManager.RoleExists(authUser))
+            if (!RoleManager.RoleExists(authRole))
             {
-                var roleresult = RoleManager.Create(new IdentityRole(authUser));
+                var roleresult = RoleManager.Create(new IdentityRole(authRole));
+            }
+            if (!RoleManager.RoleExists(defaultRole))
+            {
+                var roleresult = RoleManager.Create(new IdentityRole(defaultRole));
             }
 
+            // Set default Admin details
+            string adminName = "Admin";
+            string adminPassword = "123456";                       
             // Actually create Admin user
             var user = new ApplicationUser();
             user.UserName = adminName;
             var adminResult = UserManager.Create(user, adminPassword);
-
             // Add Admin to Admin role
             if (adminResult.Succeeded)
             {
                 var result = UserManager.AddToRole(user.Id, adminRole);
             }
 
+            // Add some extra users
+            var user1 = new ApplicationUser();
+            user1.UserName = "Joe";
+            user1.Email = "joe@example.com";
+            var adduser = UserManager.Create(user1, "abc123");
+            if (adduser.Succeeded)
+            {
+                UserManager.AddToRole(user1.Id, authRole);
+            }
+
+            var user2 = new ApplicationUser();
+            user2.UserName = "Sally";
+            user2.Email = "sally@example.com";
+            adduser = UserManager.Create(user2, "abc123");
+            if (adduser.Succeeded)
+            {
+                UserManager.AddToRole(user2.Id, defaultRole);
+            }
+
+            var user3 = new ApplicationUser();
+            user3.UserName = "Chris";
+            user3.Email = "chris@example.com";
+            adduser = UserManager.Create(user3, "abc123");
+            if (adduser.Succeeded)
+            {
+                UserManager.AddToRole(user3.Id, authRole);
+            }
+
             // return user to assign it to seed events
-            return user;
+            return new ApplicationUser[]{ user1, user2, user3 };
         }
 
     
         protected override void Seed(MapsAgo.Model.MapsAgoDbContext context)
         {
-            var user = InitializeUserData(context);
+            var users = InitializeUserData(context);
 
             var EventTypes = new List<EventType> {
                 new EventType { Id = 1, Name = "Unknown" },
@@ -156,7 +192,8 @@ namespace MapsAgo.Web.Migrations
                     DateCreated = new DateTime(2013, 2, 1),
                     EventTypeId = 2,
                     LocationId = 1,
-                    User = user
+                    Flagged = false,
+                    User = users[0]
                 },
                 new Event
                 {
@@ -169,7 +206,8 @@ namespace MapsAgo.Web.Migrations
                     DateCreated = new DateTime(2014, 1, 10),
                     EventTypeId = 2,
                     LocationId = 2,
-                    User = user
+                    Flagged = true,
+                    User = users[2]
                 },
                 new Event
                 {
@@ -183,7 +221,8 @@ namespace MapsAgo.Web.Migrations
                     Resources = Resources,
                     EventTypeId = 1,
                     LocationId = 2,
-                    User = user
+                    Flagged = false,
+                    User = users[0]
                 }
             };
 

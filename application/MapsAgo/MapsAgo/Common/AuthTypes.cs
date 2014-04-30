@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Common
 {
-    public enum ResourceType
+    public enum AuthTypes
     {
-        Image, 
-        Video, 
-        Audio, 
-        Link
+        Admin, 
+        Authorized,
+        Default
     }
 }

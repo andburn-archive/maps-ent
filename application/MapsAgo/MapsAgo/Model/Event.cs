@@ -35,6 +35,8 @@ namespace MapsAgo.Model
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
 
+        public bool Flagged { get; set; }
+
         // TODO: need to find out how to convert this for display
         [Timestamp]
         public byte[] LastModified { get; set; }                 

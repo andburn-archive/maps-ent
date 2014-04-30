@@ -1,8 +1,8 @@
 ﻿@model MapsAgo.Web.ViewModels.RoleItemViewModel
 
-@Html.HiddenFor(Model.Id)
-@Html.HiddenFor(Model.Name)
+@Html.HiddenFor(x => Model.Id)
+@Html.HiddenFor(x => Model.Name)
 <div>
-    @Html.CheckBoxFor(Model.Checked)
+    @Html.CheckBoxFor(x => Model.Checked)
     @Html.LabelFor(x => x.Checked, Model.Name)
 </div>

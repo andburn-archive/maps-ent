@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\AuthTypes.cs" />
     <Compile Include="Common\ResourceType.cs" />
     <Compile Include="Data\IEventRepository.cs" />
     <Compile Include="Data\IEventTypeRepository.cs" />
