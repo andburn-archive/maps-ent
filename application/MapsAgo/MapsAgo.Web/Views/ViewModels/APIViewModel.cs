@@ -63,6 +63,7 @@ namespace MapsAgo.Web.ViewModels
             this.excerpt = realEvent.Excerpt;
             this.category = TypeName;
             this.type = "Feature";
+            this.resources = makeResources(resources);
             makeProperties();
             this.point = new
             {
@@ -82,9 +83,24 @@ namespace MapsAgo.Web.ViewModels
                 startDate = this.startDate,
                 endDate = this.endDate,
                 category = this.category,
+                resouces = this.resources,
                 location = this.location,
                 description = this.description
             };
+        }
+        private Object makeResources(IEnumerable<Resource> resources)
+        { 
+            List<Object> resourcesList = new List<object>();
+            foreach (var resource in resources) {
+                var r = new
+                {
+                    name = resource.Name,
+                    type = resource.Type,
+                    url = resource.Url
+                };
+                resourcesList.Add(r);
+            }
+            return resourcesList;
         }
     }
 
