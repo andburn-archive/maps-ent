@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
+using MapsAgo.Web.Models;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -87,7 +88,6 @@ namespace MapsAgo.Web.Controllers
                 Event e = newEvent.MapToEvent();
                 Location l = newEvent.MapToLocation();
 
-
                 db.Locations.Add(l);
 
                 e.Location = l;
@@ -96,8 +96,6 @@ namespace MapsAgo.Web.Controllers
                 db.Events.Add(e);
 
                 db.SaveChanges();
-
-
 
                 return RedirectToAction("Details", "Event", new { id = e.Id });
             }

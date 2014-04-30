@@ -28,7 +28,7 @@ namespace MapsAgo.Web.Controllers
             // POINT(Long Lat)
             var s = DateTime.Parse(startdate);
             var e = DateTime.Parse(enddate);
-            var rs = formatJson(GetEventsByTime(s, e));
+            var rs = jsonResponse(GetEventsByTime(s, e));
 
             return Json(rs);
 
@@ -123,27 +123,30 @@ namespace MapsAgo.Web.Controllers
                         select e).Take(2);
             return es;
         }
-
-        private string formatJson(IEnumerable<Event> results)
+        private Object getPointList(IEnumerable<Event> results)
         {
-            List<APIViewModel> list = new List<APIViewModel>();
-
-            JavaScriptSerializer s = new JavaScriptSerializer();
-
+            //List<APIViewModel> list = new List<APIViewModel>();
+            List<Object> pointlist = new List<Object>();
             foreach (var result in results)
             {
-                Object l = new { 
-                    Latitude = result.Location.Coordinates.Latitude,
-                    Longitude = result.Location.Coordinates.Longitude
-                };
-                var type = (from types in db.EventTypes
-                           where types.Id == result.EventTypeId
-                           select types.Name).First().ToString();
-                var r = new APIViewModel(result, l, type);
-                list.Add(r);
-            }
+                var res = result.Resources.ToList();
 
-            return s.Serialize(list);
+                var r = new APIViewModel(result, result.Location, result.Type.Name, res);
+
+                pointlist.Add(r.point);
+            }
+            return pointlist;
+        }
+        private string jsonResponse(IEnumerable<Event> results)
+        {
+            JavaScriptSerializer s = new JavaScriptSerializer();
+            Object pointlist = getPointList(results);
+            Object response = new
+            {
+                type = "FeatureCollection",
+                features = pointlist
+            };
+            return s.Serialize(response);
         }
         #endregion
     }

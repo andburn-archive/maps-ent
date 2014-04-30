@@ -1,149 +1,107 @@
 ﻿@model MapsAgo.Web.ViewModels.NewEventViewModel
 
 @{
-    ViewBag.Title = "CreateFull";
+    ViewBag.Title = "New Event";
 }
 
-<h2>CreateFull</h2>
+<h2>@ViewBag.Title</h2>
 
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h4>NewEventViewModel</h4>
+<div class="row">
+    <div class="well col-lg-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+    <fieldset class="form-horizontal">
+        <legend>New Events</legend>
         <hr />
         @Html.ValidationSummary(true)
-
         <div class="form-group">
-            @Html.LabelFor(model => model.EventStartYear, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventStartYear)
-                @Html.ValidationMessageFor(model => model.EventStartYear)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventStartMonth, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventStartMonth)
-                @Html.ValidationMessageFor(model => model.EventStartMonth)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventStartDay, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventStartDay)
-                @Html.ValidationMessageFor(model => model.EventStartDay)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventEndYear, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventEndYear)
-                @Html.ValidationMessageFor(model => model.EventEndYear)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventEndMonth, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventEndMonth)
-                @Html.ValidationMessageFor(model => model.EventEndMonth)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventEndDay, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventEndDay)
-                @Html.ValidationMessageFor(model => model.EventEndDay)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventName)
+            @Html.LabelFor(model => model.EventName, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.EventName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EventName)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventExcerpt, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventExcerpt)
+            @Html.LabelFor(model => model.EventExcerpt, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.EventExcerpt, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EventExcerpt)
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventDescription, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventDescription)
+            @Html.LabelFor(m => m.EventDescription, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextArea("EventDescription", "", 5, 15, new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.EventDescription)
             </div>
-        </div>
+        </div>        
+
+        @Html.Partial("_EventPartials/_StartDate")
+        @Html.Partial("_EventPartials/_EndDate")
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventSource, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventSource)
-                @Html.ValidationMessageFor(model => model.EventSource)
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LocationName, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LocationName)
-                @Html.ValidationMessageFor(model => model.LocationName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitude)
-                @Html.ValidationMessageFor(model => model.Latitude)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitude, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitude)
-                @Html.ValidationMessageFor(model => model.Longitude)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LocationAlias, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LocationAlias)
-                @Html.ValidationMessageFor(model => model.LocationAlias)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventTypeId, "EventTypeId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("EventTypeId", String.Empty)
+            @Html.LabelFor(model => model.EventTypeId, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(m => m.EventTypeId, null, string.Empty, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EventTypeId)
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            @Html.LabelFor(model => model.EventSource, new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.EventSource, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.EventSource)
             </div>
         </div>
+
+        <hr/>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LocationId, "Existing Location", new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(m => m.LocationId, null , string.Empty, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LocationId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("LocationName", new { @class = "control-label col-md-4" })
+            <div class="col-md-8">
+                @Html.TextBox("LocationName", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Latitude, "Coordinates", new { @class = "control-label col-md-4" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Latitude, new { @class = "form-control", type = "number", placeholder = "Latitude" })
+                @Html.ValidationMessageFor(model => model.Latitude)
+            </div>
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Longitude, new { @class = "form-control", type = "number", placeholder = "Longitude" })
+                @Html.ValidationMessageFor(model => model.Longitude)
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+                <input type="submit" value="Create" class="btn btn-info" />
+            </div>
+        </div>
+    </fieldset>
+
+        }
     </div>
-}
+    <div class="col-lg-6">
+
+    </div>
+</div>
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")

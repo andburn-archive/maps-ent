@@ -1,4 +1,12 @@
-﻿body {
+﻿table.table-bordered {
+    border: 5px solid #7893AD;
+}
+.date input{
+    padding: 8px 2px 8px 4px;
+    font-size: 12px;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -8,14 +16,44 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+table a.btn-xs {
+    width: 100%;
+    margin-bottom: 1px;
+}
+
+table dd, table dt {
+    display: inline-flex;
+    font-size: .8em;
+}
+dd {
+    width: 60%;
+    overflow: hidden;
+}
+dt {
+    width: 35%;
+}
+
+
+
+
+
+
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
 }
-
+form textarea {
+    min-height:6em;
+    width: 100%;
+}
+form select {
+    color: #222;
+    font-weight:400;
+}
 /* styles for validation helpers */
 .field-validation-error {
     color: #b94a48;
