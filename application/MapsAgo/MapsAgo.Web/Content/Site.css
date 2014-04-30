@@ -16,6 +16,29 @@ body {
     padding-left: 15px;
     padding-right: 15px;
 }
+table a.btn-xs {
+    width: 100%;
+    margin-bottom: 1px;
+}
+
+table dd, table dt {
+    display: inline-flex;
+    font-size: .8em;
+}
+dd {
+    width: 60%;
+    overflow: hidden;
+}
+dt {
+    width: 35%;
+}
+
+
+
+
+
+
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
