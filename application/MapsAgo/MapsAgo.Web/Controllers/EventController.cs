@@ -63,20 +63,13 @@ namespace MapsAgo.Web.Controllers
                 if (e.Location != null) {
                     db.Locations.Add(e.Location);
                 }
-                if (e.LocationId != null)
+                if (e.LocationId != 0)
                 {
-                   // l = db.Locations.Find(newEvent.Id);
-                        //from db.Locations
-                        //Location newEvent.locationId;
-                    //e.Location = l;
                     e.Location = db.Locations.Find(e.LocationId);
                 }
                 e.User = db.Users.Find(User.Identity.GetUserId());
-                //e.User.Id = ;
                 db.Events.Add(e);
-
                 db.SaveChanges();
-
                 return RedirectToAction("Details", "Event", new { id = e.Id });
             }
 

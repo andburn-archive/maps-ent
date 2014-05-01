@@ -9,7 +9,7 @@
                 $lat.prop('disabled', bool);
                 $lon.prop('disabled', bool)
             };
-        disable(true);
+        disable(false);
         $sf.on("change", function () {
             $sf.val() == "" ? disable(false) : disable(true);
         })

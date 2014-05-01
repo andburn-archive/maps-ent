@@ -35,10 +35,6 @@ namespace MapsAgo.Web.ViewModels
             if (existingLocation()) { 
                 ev.LocationId = this.LocationId.Value;
             }
-             //existingLocation() ?  : null;
-            //ev.User = User.Identity.GetUserId();
-
-
             return ev;
         }
         public Location MapToLocation()
