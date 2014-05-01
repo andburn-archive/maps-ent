@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace MapsAgo.Web
 {
@@ -22,10 +24,10 @@ namespace MapsAgo.Web
                defaults: new
                {
                    controller = "APIEvents",
-                   category = RouteParameter.Optional,
+                   catagories = RouteParameter.Optional,
                    startdate = RouteParameter.Optional,
                    enddate = RouteParameter.Optional,
-                   searchterm = RouteParameter.Optional
+                   keywords = RouteParameter.Optional
                }
            );
 

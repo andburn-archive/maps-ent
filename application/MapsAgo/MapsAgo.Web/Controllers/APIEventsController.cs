@@ -12,13 +12,55 @@ using System.Web.Script.Serialization;
 
 namespace MapsAgo.Web.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [EnableCors("*", "*", "*")]
     public class APIEventsController : ApiController
     {
         // Set up
         private MapsAgoDbContext db = new MapsAgoDbContext();
 
         // Public Actions
+
+        // $.getJSON("http://localhost:9190/api/5/5/5?startdate=01-01-1560&enddate=01-01-1950", function(data){g=$.parseJSON(data);console.log(g)})
+        [Route("api/{zoom}/{lat}/{lon}")]
+        [HttpGet]
+        public IHttpActionResult GetByAreaAndClosest(int zoom, Double lat, Double lon, string startdate, string enddate, string keywords, string categories)
+        {
+            // POINT(Long Lat)
+            
+            var s = DateTime.Parse(startdate);
+            var e = DateTime.Parse(enddate);
+            var rs = GetEventsByTime(s, e);
+
+            if (categories != "")
+            {
+                string[] cats = categories.Split('|');
+
+                var dbCategories = (from cat in db.EventTypes
+                                  where cats.Contains(cat.Name)
+                                  select cat.Id);
+                var events = from ev in rs
+                             where dbCategories.Contains(ev.Type.Id)
+                             select ev;
+                rs = events;
+            }
+
+            if (keywords != ""){
+                string[] keys = keywords.Split('|');
+                List<Event> events = new List<Event>();
+                foreach (var key in keys) {
+                    events.Concat(from ev in rs
+                                  where String.Equals(ev.Description, key, StringComparison.OrdinalIgnoreCase)
+                                  select ev);
+
+                    //events.Add (rs.Any (x => (String.Equals(x.Description, key, StringComparison.OrdinalIgnoreCase)) ));
+                }
+                
+                rs = events;
+            }
+            
+            return Json(jsonResponse(rs));
+        }
+
 
         // $.getJSON("http://localhost:9190/api/5/5/5?startdate=01-01-1560&enddate=01-01-1950", function(data){g=$.parseJSON(data);console.log(g)})
         [Route("api/{zoom}/{lat}/{lon}")]
@@ -34,13 +76,13 @@ namespace MapsAgo.Web.Controllers
 
         }
 
-        public IHttpActionResult GetEventsByCategory(int zoom, Double lat, Double lon, string category)
+        public IHttpActionResult GetEventsByCategory(int zoom, Double lat, Double lon, string categories)
         {
 
-            if (category != null)
+            if (categories != null)
             {
                 var categoryId = (from cat in db.EventTypes
-                                  where cat.Name == category
+                                  where cat.Name == categories
                                   select cat).First().Id;
                 var events = from e in db.Events
                              where e.EventTypeId == categoryId
@@ -71,10 +113,10 @@ namespace MapsAgo.Web.Controllers
 
             var searchRef = formatLoc(lat, lon);
 
-            var nearest = (from h in db.Events
+            var nearest = from h in db.Events
                            let geo = searchRef
                            orderby geo.Distance(h.Location.Coordinates)
-                           select h).Take(2);
+                           select h;
             return Json(jsonResponse(nearest));
         }
 
@@ -112,10 +154,10 @@ namespace MapsAgo.Web.Controllers
                             .Include(e => e.Type).ToList();
             IEnumerable<Location> locations = db.Locations.ToList();
             
-            var es = (from e in evs
-                        where e.EndDate < EndTime
-                        where e.StartDate > StartTime
-                        select e).Take(2);
+            var es = from e in evs
+                    where e.EndDate < EndTime
+                    where e.StartDate > StartTime
+                    select e;
             return es;
         }
         private Object getPointList(IEnumerable<Event> results)
@@ -143,6 +185,7 @@ namespace MapsAgo.Web.Controllers
             };
             return s.Serialize(response);
         }
+
         #endregion
     }
 }
