@@ -20,8 +20,12 @@ namespace MapsAgo.Web.ViewModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Excerpt { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy}", 
+            ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm}",
+            ApplyFormatInEditMode = false)]
+        public DateTime Modified { get; set; }
         public bool Flagged { get; set; }
 
         public EventItemViewModel() {}
@@ -32,6 +36,7 @@ namespace MapsAgo.Web.ViewModels
             Name = e.Name;
             Excerpt = e.Excerpt;
             Date = e.StartDate.Date;
+            Modified = e.LastModified;
             Flagged = e.Flagged;
         }        
     }
@@ -54,6 +59,7 @@ namespace MapsAgo.Web.ViewModels
     public class UserDetailViewModel
     {
         public string Id { get; set; }
+        [DisplayName("User Name")]
         public string UserName { get; set; }
         public string Email { get; set; }
 

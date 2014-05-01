@@ -6,21 +6,19 @@
         {
             <span class="glyphicon glyphicon-flag"
                   style="color: red"></span>
-        }
-        else
-        {
-            <span class="glyphicon glyphicon-flag"
-                  style="color: lightgray"></span>
-        }
+        }        
     </td>
     <td>
         @Html.DisplayFor(x => Model.Name)
     </td>
     <td>
-        @Html.DisplayFor(x => Model.Excerpt)
+        @Html.DisplayFor(x => Model.Date)
     </td>
     <td>
-        @Html.DisplayFor(x => Model.Date)
+        @Html.DisplayFor(x => Model.Excerpt)
+    </td>    
+    <td>
+        @Html.DisplayFor(x => Model.Modified)
     </td>
     <td>
         @Html.ActionLink("View", "Details", "Event", 

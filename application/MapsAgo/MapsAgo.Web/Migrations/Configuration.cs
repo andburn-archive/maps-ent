@@ -76,8 +76,16 @@ namespace MapsAgo.Web.Migrations
                 UserManager.AddToRole(user3.Id, authRole);
             }
 
+            var user4 = new ApplicationUser();
+            user4.UserName = "Linda";
+            adduser = UserManager.Create(user4, "abc123");
+            if (adduser.Succeeded)
+            {
+                UserManager.AddToRole(user4.Id, authRole);
+            }
+
             // return users to assign it to seed events
-            return new ApplicationUser[] { user1, user2, user3 };
+            return new ApplicationUser[] { user1, user2, user3, user4 };
         }
 
 
@@ -134,6 +142,7 @@ namespace MapsAgo.Web.Migrations
                     StartDate = new DateTime(1520, 11, 7),
                     EndDate = new DateTime(1520, 11, 10),
                     DateCreated = new DateTime(2013, 2, 1),
+                    LastModified = new DateTime(2013, 2, 1),
                     Resources = new List<Resource> {Resources[1]},
                     EventTypeId = 2,
                     LocationId = 1,
@@ -149,6 +158,7 @@ namespace MapsAgo.Web.Migrations
                     StartDate = new DateTime(1810, 9, 16),
                     EndDate = new DateTime(1821,1, 2),
                     DateCreated = new DateTime(2014, 1, 10),
+                    LastModified = new DateTime(2014, 1, 10),
                     Resources = new[] {Resources[0]},
                     EventTypeId = 2,
                     LocationId = 2,
@@ -164,6 +174,7 @@ namespace MapsAgo.Web.Migrations
                     StartDate = new DateTime(1916, 3, 14),
                     EndDate = new DateTime(1917, 2, 7),
                     DateCreated = new DateTime(2014, 2, 1),             
+                    LastModified = new DateTime(2014, 2, 1),             
                     Resources = Resources,
                     EventTypeId = 1,
                     LocationId = 2,

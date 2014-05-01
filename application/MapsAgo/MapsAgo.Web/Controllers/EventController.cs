@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
 using MapsAgo.Web.Models;
+using MapsAgo.Common;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -16,9 +17,9 @@ namespace MapsAgo.Web.Controllers
     {
         private MapsAgoDbContext db = new MapsAgoDbContext();
 
-        //only the Admin and AuthorizedUser users can view the Events page
+        // only the Admin and AuthorizedUser users can view the Events page
         // GET: /Event/
-        [Authorize(Roles = "Admin , AuthorizedUser")]
+        [AuthorizeByRole(RoleType.Admin, RoleType.Authorized)]
         public ActionResult Index()
         {
             var events = db.Events

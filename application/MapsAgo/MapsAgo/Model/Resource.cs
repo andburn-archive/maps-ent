@@ -21,17 +21,16 @@ namespace MapsAgo.Model
         [Required]
         public ResourceType Type { get; set; }
 
+        // TODO: what about regex validation?
+        // (http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ;,./?%&=]*)?
+        // http://stackoverflow.com/questions/161738/what-is-the-best-regular-expression-to-check-if-a-string-is-a-valid-url
         [Required]
         [StringLength(2048)]
         public string Url { get; set; }
-
-        // (http(s)?://)?([\w-]+\.)+[\w-]+(/[\w- ;,./?%&=]*)?
-
+      
         public string Description { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
 
-
-        public bool IsValid { get; set; }
     }
 }

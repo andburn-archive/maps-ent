@@ -25,14 +25,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <!-- Authorize specific menu items -->
                     @using Microsoft.AspNet.Identity
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Hi", "Index", "Hi")</li>
-                    }
-                    @if (Request.IsAuthenticated)
-{
-                        <li>@Html.ActionLink("Test", "Index", "Test")</li>
+                    @if (Request.IsAuthenticated) {
+                        <li>@Html.ActionLink("Events", "Index", "Event")</li>
                     }          
                 </ul>
                 @Html.Partial("_LoginPartial")

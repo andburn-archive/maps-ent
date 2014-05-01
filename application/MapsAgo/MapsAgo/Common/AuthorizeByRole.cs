@@ -29,7 +29,7 @@ namespace MapsAgo.Common
             if (httpContext == null) 
             {
                 throw new ArgumentNullException("httpContext");
-            }                
+            }
 
             // First check current user is authenticated
             if (!httpContext.User.Identity.IsAuthenticated) 
@@ -54,6 +54,17 @@ namespace MapsAgo.Common
                 from r in roles
                 where r.ToString() == n
                 select n;
+
+            //System.Diagnostics.Debug.WriteLine("roleNames:");
+            //foreach (var i in roleNames)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(i);
+            //}
+            //System.Diagnostics.Debug.WriteLine("authRoles:");
+            //foreach (var i in authRoles)
+            //{
+            //    System.Diagnostics.Debug.WriteLine(i);
+            //}
 
             return authRoles.Count() > 0 ? true : false;
         }

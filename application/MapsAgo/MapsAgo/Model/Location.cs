@@ -24,7 +24,7 @@ namespace MapsAgo.Model
         [Required]
         public DbGeography Coordinates { get; set; }
 
-        // Foreign Keys and Navigation Properties
+        //----- Foreign Keys and Navigation Properties
 
         public virtual ICollection<Event> Events { get; set; }
 

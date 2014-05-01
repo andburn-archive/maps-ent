@@ -14,7 +14,6 @@ namespace MapsAgo.Model
         [Required]
         public string Name { get; set; }
 
-        // TODO: could possibly generate this from description
         [StringLength(128)]
         public string Excerpt { get; set; }
 
@@ -23,25 +22,32 @@ namespace MapsAgo.Model
         [StringLength(512)]
         public string Source { get; set; } 
 
-        // TODO: dates could be just Date type ?
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", 
+            ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]        
         public DateTime StartDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", 
+            ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime EndDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        // TODO: Is this strictly necessary
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm}",
+            ApplyFormatInEditMode = false)]
         public DateTime DateCreated { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm}", 
+            ApplyFormatInEditMode = false)]
+        public DateTime LastModified { get; set; }
 
         public bool Flagged { get; set; }
 
-        // TODO: need to find out how to convert this for display
+        // Only for managing concurrency in DB
         [Timestamp]
-        public byte[] LastModified { get; set; }                 
-
-        // Foreign Keys and Navigation Properties
+        public byte[] Timestamp { get; set; }                 
+         
+        //----- Foreign Keys and Navigation Properties
 
         public int LocationId { get; set; }
         public virtual Location Location { get; set; }

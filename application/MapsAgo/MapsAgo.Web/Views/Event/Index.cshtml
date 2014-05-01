@@ -78,9 +78,10 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id}, new { @class = "btn btn-xs btn-default" })
             @Html.ActionLink("Details", "Details", new { id = item.Id}, new { @class = "btn btn-xs btn-default" })
-            @if (User.IsInRole("Admin"))
+            @using MapsAgo.Common
+            @if (User.IsInRole(RoleType.Admin.ToString()))
             {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id}, new { @class = "btn btn-xs btn-danger" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id}, new { @class = "btn btn-xs btn-danger" })
             }
         </td>
     </tr>

@@ -1,54 +1,62 @@
 ﻿@model MapsAgo.Web.ViewModels.UserDetailViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "User Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>UserDetailViewModel</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-    </dl>
-</div>
-
-<div>
-    @Html.EditorFor(model => model.UserRoles)
-</div>
-
-
+<h2>User Details</h2>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to User List", "Index")
 </p>
 
-<h2>Events</h2>
+@using (Html.BeginForm("Details", "Users", FormMethod.Post, 
+    new { @class = "form-horizontal", role = "form" }))
+{
 <table class="table">
     <tr>
-        <!-- TODO: better to have these dynamic -->
-        <th></th>
+        <td><strong>@Html.DisplayNameFor(model => model.UserName)</strong></td>
+        <td><strong>@Html.DisplayNameFor(model => model.Email)</strong></td>
+        <td><strong>Roles</strong></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(model => model.UserName)</td>
+        <td>@Html.DisplayFor(model => model.Email)</td>
+        <td>@Html.EditorFor(model => model.UserRoles)</td>
+        <td><input type="submit" value="Save" class="btn btn-primary" /></td>
+    </tr>
+</table>
+}
+
+<hr />
+<h2>User Events</h2>
+
+<table class="table">
+    <tr>
+        <th><span class="glyphicon glyphicon-flag"></span></th>
         <th>Name</th>
+        <th>Year</th>
         <th>Excerpt</th>
-        <th>Year</th>        
+        <th>Modified</th>
         <th></th>
     </tr>
-    @Html.DisplayFor(model => model.UserEvents)
+    @if (Model.UserEvents.Count() > 0)
+    {
+        @Html.DisplayFor(model => model.UserEvents)
+    }
+    else
+    {
+        <tr>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td>&mdash;</td>
+            <td></td>
+        </tr>
+    }
 </table>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

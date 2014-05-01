@@ -3,10 +3,8 @@ using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MapsAgo.Web.Controllers
@@ -32,7 +30,6 @@ namespace MapsAgo.Web.Controllers
             RoleManager = roleManager;
         }        
         
-        //
         // GET: /Users/
         public ActionResult Index()
         {
@@ -45,7 +42,8 @@ namespace MapsAgo.Web.Controllers
                 RoleManager.FindByName(RoleType.Admin.ToString());
 
             // TODO: users without roles will not show, 
-            // must ensure all users are assigned roles
+            // must ensure all users are assigned roles,
+            // more one role => appear more than once too.
             var list = from u in users
                        from r in u.Roles
                        where r.RoleId != AdminRole.Id
@@ -53,19 +51,22 @@ namespace MapsAgo.Web.Controllers
                        {
                            Id = u.Id,
                            UserName = u.UserName,
-                           Email = u.Email,
+                           Email = u.Email == null 
+                                ? "unknown"
+                                : u.Email,
                            NumberOfEvents = u.Events.Count(),
                            FlaggedEvents = (from e in u.Events
                                             where e.Flagged
                                             select e).Count(),
                            Authorized = r.RoleId == AuthRole.Id
                        };
-
+            // order list so unauthorized are at bottom
+            list = list.Select(x => x)
+                .OrderByDescending(x => x.Authorized);
             return View(list);
         }
 
-        //
-        // GET: /Users/Details/5
+        // GET: /Users/Details/5dfe-3ff3f-sdf332
         public ActionResult Details(string id)
         {
             // TODO: can this even be null?
@@ -90,12 +91,12 @@ namespace MapsAgo.Web.Controllers
 
             IEnumerable<EventItemViewModel> uevents = 
                 from e in user.Events
+                orderby e.LastModified descending
                 select new EventItemViewModel(e);
 
-            // TODO: do we want to include Admin assignable to Users?
             IEnumerable<RoleItemViewModel> uroles =
                 from r in roles
-                //where r.Name != RoleType.Admin.ToString()
+                where r.Name != RoleType.Admin.ToString()
                 select new RoleItemViewModel
                 {
                     Id = r.Id,
@@ -106,17 +107,51 @@ namespace MapsAgo.Web.Controllers
             return View(new UserDetailViewModel { 
                 Id = user.Id,
                 UserName = user.UserName,
-                Email = user.Email,
+                Email = user.Email == null
+                        ? "unknown"
+                        : user.Email,
                 UserRoles = uroles,
                 UserEvents = uevents
             });  
         }
         
-        //
-        // GET: /Users/Edit/5
-        public ActionResult Edit(string id)
-        {
-            return View();
+        // POST: /Users/Details/sd9df-kalsf-3d9dd
+        [HttpPost]
+        public ActionResult Details(string id, FormCollection collection)
+        {            
+            int values = collection.Count / 3;
+            for (int i = 0; i < values; i++)
+            {
+                var roleId = collection["UserRoles[" + i + "].Id"];
+                var roleName = collection["UserRoles[" + i + "].Name"];
+                var roleCheck = collection["UserRoles[" + i + "].Checked"].Split(',')[0];
+
+                bool ticked = roleCheck == "true" ? true : false;
+                bool hasRole = UserManager.IsInRole(id, roleName);
+                IdentityResult result = null;
+
+                if (hasRole != ticked)
+                {
+                    // state is different
+                    if (hasRole)
+                    {
+                        result = UserManager.RemoveFromRole(id, roleName);
+                    }
+                    else 
+                    {
+                        result = UserManager.AddToRole(id, roleName); 
+                    }
+
+                }
+
+                if (result == null || !result.Succeeded)
+                {
+                    // do something?
+                    System.Diagnostics.Debug.WriteLine("details: " + id + ", shit is fucked up!");
+                }
+
+            }
+            return RedirectToAction("Details", new { id = id });
         }
 
         //

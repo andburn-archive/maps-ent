@@ -4,5 +4,6 @@
 @Html.HiddenFor(x => Model.Name)
 <div>
     @Html.CheckBoxFor(x => Model.Checked)
-    @Html.LabelFor(x => x.Checked, Model.Name)
+    @Html.LabelFor(x => x.Checked, Model.Name, 
+        new { style = "font-weight: normal" })
 </div>
