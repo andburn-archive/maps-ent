@@ -10,6 +10,8 @@ using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
 using MapsAgo.Web.Models;
 using MapsAgo.Common;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -58,21 +60,19 @@ namespace MapsAgo.Web.Controllers
             if (ModelState.IsValid)
             {
                 Event e = newEvent.MapToEvent();
-                Location l;
-                if (newEvent.newLocation()) { 
-                    l = newEvent.MapToLocation();
-                    db.Locations.Add(l);
-                    e.Location = l;
+                if (e.Location != null) {
+                    db.Locations.Add(e.Location);
                 }
-                if (newEvent.existingLocation())
+                if (e.LocationId != null)
                 {
-                    //l = newEvent.Id
+                   // l = db.Locations.Find(newEvent.Id);
                         //from db.Locations
                         //Location newEvent.locationId;
                     //e.Location = l;
-                    //e.LocationId = l.Id;
+                    e.Location = db.Locations.Find(e.LocationId);
                 }
-
+                e.User = db.Users.Find(User.Identity.GetUserId());
+                //e.User.Id = ;
                 db.Events.Add(e);
 
                 db.SaveChanges();
