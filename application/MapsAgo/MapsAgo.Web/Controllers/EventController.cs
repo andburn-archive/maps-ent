@@ -44,37 +44,8 @@ namespace MapsAgo.Web.Controllers
             return View(ev);
         }
 
-        // GET: /Event/Create
         public ActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
-            return View();
-        }
-
-        // POST: /Event/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId,ApplicationUserId")] Event ev)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Events.Add(ev);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
-            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
-            return View(ev);
-        }
-
-        public ActionResult CreateFull()
-        {
 
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
@@ -82,17 +53,25 @@ namespace MapsAgo.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateFull(NewEventViewModel newEvent)
+        public ActionResult Create(NewEventViewModel newEvent)
         {
             if (ModelState.IsValid)
             {
                 Event e = newEvent.MapToEvent();
-                Location l = newEvent.MapToLocation();
-
-                db.Locations.Add(l);
-
-                e.Location = l;
-                e.LocationId = l.Id;
+                Location l;
+                if (newEvent.newLocation()) { 
+                    l = newEvent.MapToLocation();
+                    db.Locations.Add(l);
+                    e.Location = l;
+                }
+                if (newEvent.existingLocation())
+                {
+                    //l = newEvent.Id
+                        //from db.Locations
+                        //Location newEvent.locationId;
+                    //e.Location = l;
+                    //e.LocationId = l.Id;
+                }
 
                 db.Events.Add(e);
 

@@ -34,26 +34,23 @@ namespace MapsAgo.Web.Controllers
 
         }
 
-        public IEnumerable<Event> GetEventsByCategory(string category)
+        public IHttpActionResult GetEventsByCategory(int zoom, Double lat, Double lon, string category)
         {
 
             if (category != null)
             {
-
                 var categoryId = (from cat in db.EventTypes
                                   where cat.Name == category
                                   select cat).First().Id;
-
                 var events = from e in db.Events
                              where e.EventTypeId == categoryId
                              select e;
-                return events;
+                return Json(jsonResponse(events));
             }
-
-            return db.Events;
+            return Json(jsonResponse(db.Events));
         }
 
-        public IEnumerable<Event> GetEventsByName(string name)
+        public IHttpActionResult GetEventsByName(int zoom, Double lat, Double lon, string name)
         {
             var events = from e in db.Events
                          select e;
@@ -61,14 +58,14 @@ namespace MapsAgo.Web.Controllers
             if (name != null)
             {
                 var evs = events.Where((ep) => ep.Name.Contains(name));
-                return evs;
+                return Json(jsonResponse(evs));
             }
-            return events;
+            return Json(jsonResponse(events));
         }
 
         [Route("api/{zoom}/{lat}/{lon}")]
         [HttpGet]
-        public IEnumerable<Event> GetClosest(int zoom, Double lat, Double lon)
+        public IHttpActionResult GetClosest(int zoom, Double lat, Double lon)
         {
             // POINT(Long Lat)
 
@@ -78,20 +75,18 @@ namespace MapsAgo.Web.Controllers
                            let geo = searchRef
                            orderby geo.Distance(h.Location.Coordinates)
                            select h).Take(2);
-            return nearest;
-
-
+            return Json(jsonResponse(nearest));
         }
 
         [Route("api/events")]
         [HttpGet]
-        public IEnumerable<Event> GetAllEvents()
+        public IHttpActionResult GetAllEvents()
         {
             var events = (from e in db.Events
                           select e)
                          .Take(4); // How many to take from matched entries
 
-            return events;
+            return Json(jsonResponse(events));
         }
 
 
