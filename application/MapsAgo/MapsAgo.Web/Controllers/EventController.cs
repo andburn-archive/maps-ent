@@ -10,6 +10,8 @@ using MapsAgo.Model;
 using MapsAgo.Web.ViewModels;
 using MapsAgo.Web.Models;
 using MapsAgo.Common;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -44,37 +46,8 @@ namespace MapsAgo.Web.Controllers
             return View(ev);
         }
 
-        // GET: /Event/Create
         public ActionResult Create()
         {
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
-            ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
-            return View();
-        }
-
-        // POST: /Event/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Name,Excerpt,Description,Source,StartDate,EndDate,DateCreated,LastModified,LocationId,EventTypeId,ApplicationUserId")] Event ev)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Events.Add(ev);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name", ev.LocationId);
-            ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name", ev.EventTypeId);
-            //ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email", ev.ApplicationUserId);
-            return View(ev);
-        }
-
-        public ActionResult CreateFull()
-        {
 
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
@@ -82,22 +55,21 @@ namespace MapsAgo.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateFull(NewEventViewModel newEvent)
+        public ActionResult Create(NewEventViewModel newEvent)
         {
             if (ModelState.IsValid)
             {
                 Event e = newEvent.MapToEvent();
-                Location l = newEvent.MapToLocation();
-
-                db.Locations.Add(l);
-
-                e.Location = l;
-                e.LocationId = l.Id;
-
+                if (e.Location != null) {
+                    db.Locations.Add(e.Location);
+                }
+                if (e.LocationId != 0)
+                {
+                    e.Location = db.Locations.Find(e.LocationId);
+                }
+                e.User = db.Users.Find(User.Identity.GetUserId());
                 db.Events.Add(e);
-
                 db.SaveChanges();
-
                 return RedirectToAction("Details", "Event", new { id = e.Id });
             }
 

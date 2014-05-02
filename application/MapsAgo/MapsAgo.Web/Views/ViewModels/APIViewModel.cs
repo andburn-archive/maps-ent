@@ -3,6 +3,7 @@ using MapsAgo.Model;
 using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Collections.Generic;
+using MapsAgo.Common;
 
 namespace MapsAgo.Web.ViewModels
 {
@@ -83,7 +84,7 @@ namespace MapsAgo.Web.ViewModels
                 startDate = this.startDate,
                 endDate = this.endDate,
                 category = this.category,
-                resouces = this.resources,
+                resources = this.resources,
                 location = this.location,
                 description = this.description
             };
@@ -95,7 +96,7 @@ namespace MapsAgo.Web.ViewModels
                 var r = new
                 {
                     name = resource.Name,
-                    type = resource.Type,
+                    type = resource.Type.ToString(),
                     url = resource.Url
                 };
                 resourcesList.Add(r);

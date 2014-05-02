@@ -27,40 +27,42 @@
         <th>
             @Html.DisplayNameFor(model => model.LastModified)
         </th>
+        <th>
+            Created By
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-
-
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Type.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(modelItem => item.Type.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Source)
-            </dt>
-            <dd>
-                @Html.DisplayFor(modelItem => item.Source)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </dt>
-            <dd>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </dd>
+            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type.Name)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Type.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Source)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.Source)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </dd>
+            </dl>
         </td>
  
         <td>
@@ -74,6 +76,11 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.LastModified)
+        </td>
+        <td>
+            @Html.ActionLink(item.User.UserName, "Details", "Users",
+                new { id = item.User.Id },
+                new { @class = "btn btn-default btn-xs" })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id = item.Id}, new { @class = "btn btn-xs btn-default" })

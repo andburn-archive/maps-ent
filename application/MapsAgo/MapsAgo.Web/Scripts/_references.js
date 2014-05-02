@@ -7,3 +7,4 @@
 /// <reference path="jquery.validate.unobtrusive.js" />
 /// <reference path="respond.matchmedia.addlistener.js" />
 /// <reference path="map.js" />
+/// <reference path="addevent.js" />

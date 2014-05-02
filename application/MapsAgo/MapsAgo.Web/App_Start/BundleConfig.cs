@@ -29,6 +29,10 @@ namespace MapsAgo.Web
             bundles.Add(new StyleBundle("~/Content/main").Include(
                       "~/Content/bootstrap-themed.min.css",
                       "~/Content/site.css"));
+
+            // Custom View Scripts
+            bundles.Add(new ScriptBundle("~/bundles/addevent").Include(
+                      "~/Scripts/addevent.js"));
         }
     }
 }

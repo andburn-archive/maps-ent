@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MapsAgo.Web.ViewModels
 {
@@ -21,25 +23,46 @@ namespace MapsAgo.Web.ViewModels
             ev.Description = this.EventDescription;
             ev.StartDate = this.StartDate;
             ev.EndDate = this.EndDate;
-            ev.DateCreated = DateTime.Now;
+            ev.DateCreated = (this.DateCreated == DateTime.MinValue) ?
+                DateTime.Now :
+                this.DateCreated;
+            ev.LastModified = DateTime.Now;
             ev.EventTypeId = this.EventTypeId;
 
+            if (newLocation()) {
+                ev.Location = MapToLocation();
+            }
+            if (existingLocation()) { 
+                ev.LocationId = this.LocationId.Value;
+            }
             return ev;
         }
         public Location MapToLocation()
         {
+            
             var loc = new Location();
-
             loc.Name = this.LocationName;
             loc.Alias = this.LocationAlias;
             loc.Coordinates = this.LocationCoordinates;
-
-
             return loc;
+            
+        }
+        public bool newLocation()
+        {
+            return (this.Latitude != null &&
+                this.Longitude != null &&
+                this.LocationName != null);
+        }
+
+        public bool existingLocation()
+        {
+            return this.LocationId != null;
         }
         #endregion
 
         #region Properties
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+            ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime StartDate
         {
@@ -49,6 +72,8 @@ namespace MapsAgo.Web.ViewModels
                 return d;
             }
         }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}",
+            ApplyFormatInEditMode = true)]
         [Column(TypeName = "datetime2")]
         public DateTime EndDate
         {
@@ -114,8 +139,18 @@ namespace MapsAgo.Web.ViewModels
         [DisplayName("Source URL")]
         public string EventSource { get; set; }
 
+        // TODO: Is this strictly necessary
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm}",
+            ApplyFormatInEditMode = false)]
+        public DateTime DateCreated { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy hh:mm}",
+            ApplyFormatInEditMode = false)]
+        public DateTime LastModified { get; set; }
+
+        // Only for managing concurrency in DB
         [Timestamp]
-        public byte[] LastModified { get; set; }
+        public byte[] Timestamp { get; set; }  
 
         public int? LocationId { get; set; }
         public virtual Location Id { get; set; }
@@ -143,17 +178,7 @@ namespace MapsAgo.Web.ViewModels
 
         #region Private Methods
 
-        private bool newLocation()
-        {
-            return (this.Latitude != null &&
-                this.Longitude != null &&
-                this.LocationName != null);
-        }
 
-        private bool existingLication()
-        {
-            return this.LocationId != null;
-        }
 
 
         #endregion

@@ -12,7 +12,7 @@
         {
             @Html.AntiForgeryToken()
     <fieldset class="form-horizontal">
-        <legend>New Events</legend>
+        <legend>New Event</legend>
         <hr />
         @Html.ValidationSummary(true)
         <div class="form-group">
@@ -67,7 +67,8 @@
                 @Html.ValidationMessageFor(model => model.LocationId)
             </div>
         </div>
-
+        <hr />
+        <h4>Or, add a new Location</h4>
         <div class="form-group">
             @Html.Label("LocationName", new { @class = "control-label col-md-4" })
             <div class="col-md-8">
@@ -108,5 +109,5 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval", "~/bundles/addevent")
 }
