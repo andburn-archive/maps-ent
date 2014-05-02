@@ -35,7 +35,7 @@ namespace MapsAgo.Domain.Freebase
 
         public string LocationName { get; set; }
 
-        public string? LocationAlias { get; set; }
+        public string LocationAlias { get; set; }
 
         public EventType Type { get; set; }
     }

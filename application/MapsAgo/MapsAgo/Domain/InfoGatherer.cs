@@ -17,12 +17,14 @@ namespace MapsAgo.Domain
 
         public IList<ISearchResult> Search(string query, string type)
         {
-            return strategy.Search(query, type);
+            //return strategy.Search(query, type);
+            return null;
         }
 
         public IDataResource Details(string id)
         {
-            return strategy.Details(id);
+            //return strategy.Details(id);
+            return null;
         }
     }
 }

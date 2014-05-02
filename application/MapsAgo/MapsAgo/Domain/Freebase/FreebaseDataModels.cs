@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace MapsAgo.Domain.Freebase
 {
 
-    class Notable
+    class JsonNotable
     {
         public string name { get; set; }
         public string id { get; set; }
@@ -19,26 +19,26 @@ namespace MapsAgo.Domain.Freebase
         }
     }
 
-    class SearchItem
+    class JsonSearchItem
     {
-        public string mid { get; set; }
-        public string id { get; set; }
-        public string name { get; set; }
-        public Notable notable { get; set; }
-        public string lang { get; set; }
-        public float score { get; set; }
+        public string Mid { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public JsonNotable Notable { get; set; }
+        public string Lang { get; set; }
+        public float Score { get; set; }
     }
 
-    class SearchResult
+    class JsonSearchResult
     {
         public string status { get; set; }
-        public IList<SearchItem> result { get; set; }
+        public IList<JsonSearchItem> result { get; set; }
         public int cursor { get; set; }
         public int cost { get; set; }
         public int hits { get; set; }
     }
 
-    class UriItem
+    class JsonUriItem
     {
         public string Id { get; set; }
 
@@ -46,20 +46,20 @@ namespace MapsAgo.Domain.Freebase
         public Uri Uri { get; set; }
     }
 
-    class ImageItem
+    class JsonImageItem
     {
         public string Name { get; set; }
         public string Id { get; set; }
-        public UriItem[] Source { get; set; }
+        public JsonUriItem[] Source { get; set; }
     }
 
-    class GeoLocation
+    class JsonGeoLocation
     {
         public Double Longitude { get; set; }
         public Double Latitude { get; set; }
     }
 
-    class LocationItem
+    class JsonLocationItem
     {
         public string Name { get; set; }
 
@@ -71,10 +71,10 @@ namespace MapsAgo.Domain.Freebase
         public string[] Alias { get; set; }
 
         [JsonProperty("/location/location/geolocation")]
-        public GeoLocation Location { get; set; }
+        public JsonGeoLocation Location { get; set; }
     }
 
-    class MqlItem
+    class JsonMqlItem
     {
         public string Mid { get; set; }
 
@@ -93,10 +93,10 @@ namespace MapsAgo.Domain.Freebase
         public string Description { get; set; }
 
         [JsonProperty("/common/topic/image")]
-        public ImageItem[] Image { get; set; }
+        public JsonImageItem[] Image { get; set; }
 
         [JsonProperty("/time/event/locations")]
-        public LocationItem[] Location { get; set; }
+        public JsonLocationItem[] Location { get; set; }
 
         public override string ToString()
         {
@@ -105,43 +105,43 @@ namespace MapsAgo.Domain.Freebase
         }
     }
 
-    class MqlResult
+    class JsonMqlResult
     {
-        public IList<MqlItem> result { get; set; }
+        public IList<JsonMqlItem> result { get; set; }
     }
 
-    class Values
+    class JsonValues
     {
         public string Text { get; set; }
         public string Lang { get; set; }
         public string Value { get; set; }
     }
 
-    class Record
+    class JsonRecord
     {
         public string ValueType { get; set; }
-        public List<Values> Values { get; set; }
+        public List<JsonValues> Values { get; set; }
     }
 
-    class Description
+    class JsonDescription
     {
         public string ValueType { get; set; }
-        public Values[] Values { get; set; }
+        public JsonValues[] Values { get; set; }
     }
 
-    class Property
+    class JsonTopicProperty
     {
         [JsonProperty("/common/topic/description")]
-        public Record Description { get; set; }
+        public JsonRecord Description { get; set; }
 
         [JsonProperty("/common/topic/topic_equivalent_webpage")]
-        public Record WebPage { get; set; }
+        public JsonRecord WebPage { get; set; }
     }
 
-    class TopicResult
+    class JsonTopicResult
     {
         public string Id { get; set; }
-        public Property Property { get; set; }
+        public JsonTopicProperty Property { get; set; }
 
         public override string ToString()
         {
