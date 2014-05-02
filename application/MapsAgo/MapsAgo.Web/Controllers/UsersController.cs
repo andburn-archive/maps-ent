@@ -66,7 +66,7 @@ namespace MapsAgo.Web.Controllers
             return View(list);
         }
 
-        // GET: /Users/Details/5dfe-3ff3f-sdf332
+        // GET: /Users/Details/caaff697-3cbf-458e-9ab8-c926a32d877c
         public ActionResult Details(string id)
         {
             // TODO: can this even be null?

@@ -42,9 +42,20 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.1.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -61,6 +72,14 @@
     <Compile Include="Data\IEventTypeRepository.cs" />
     <Compile Include="Data\ILocationRepository.cs" />
     <Compile Include="Data\IMediaRepository.cs" />
+    <Compile Include="Domain\Freebase\FreebaseDataModels.cs" />
+    <Compile Include="Domain\Freebase\FreebaseDataResource.cs" />
+    <Compile Include="Domain\Freebase\FreebaseSearchResult.cs" />
+    <Compile Include="Domain\Freebase\FreebaseStrategy.cs" />
+    <Compile Include="Domain\IDataResource.cs" />
+    <Compile Include="Domain\IGatheringStrategy.cs" />
+    <Compile Include="Domain\InfoGatherer.cs" />
+    <Compile Include="Domain\ISearchResult.cs" />
     <Compile Include="Model\ApplicationUser.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\EventType.cs" />
@@ -69,9 +88,7 @@
     <Compile Include="Model\Resource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

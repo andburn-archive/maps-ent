@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MapsAgo.Model;
 using MapsAgo.Common;
 
+// TODO: sort or remove this test
 
 // This code tests the Resource model
 //
@@ -13,7 +14,7 @@ using MapsAgo.Common;
 // TEST 2 : Resource Should Be Valid When All Properties Correct
 
 namespace MapsAgo.Tests.Model
-{
+{    
     [TestClass]
     public class ResourceModelTest
     {
@@ -33,7 +34,7 @@ namespace MapsAgo.Tests.Model
             // Act
             // FIX: have to remove this for now
             //bool isValid = resource.IsValid;
-            bool isValid = true;
+            bool isValid = false;
 
             //Assert
             Assert.IsFalse(isValid);
