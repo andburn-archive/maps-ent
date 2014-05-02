@@ -226,8 +226,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <None Include="Properties\PublishProfiles\mapsago - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\mapsago - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mapsago %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\mapsago.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
     <Content Include="Scripts\addevent.js" />
     <Content Include="Scripts\bootstrap.js" />
