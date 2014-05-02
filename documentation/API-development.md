@@ -17,7 +17,7 @@ The response format needed to be interpreted by a JavaScript application, as suc
 
 Creating a JSON response, in a predefined format in the .Net MVC framework requires careful planning and data entity abstraction, because true entity names or database structure should not be exposed to the client. To this end an API ViewModel was created to act as the "view" or response abstraction
 
-A number of desci
+The format below shows an example of this geo JSON.
 
 ```JavaScript 
 { "type": "FeatureCollection",
@@ -54,7 +54,7 @@ A number of desci
        ]
      }
 ```
-Geo Json example
+
 GeoJson format uses Longitude/Latitude ordering rather than the Latitude/Lonitude ordering ISO 6709 standard employed by most other systems including Google Maps. Despite this, it was decided to put systems implementation secondary to aherance to the GeoJson format in order to increase accessability of the API for other systems.
 
 To compensate, the MapsAgo API includes a `location` propery with `latitude` and `longitude` properties 
@@ -103,4 +103,4 @@ To compensate, the MapsAgo API includes a `location` propery with `latitude` and
 
 In this way each response has two properties, `type` with value `FeaturesCollection` and `features` as an array of points.
 
-Each Point has three properties: "type", "geometry" (which stores coordinates) and "properties" (which contains all other metadata. Although this format is more complex than is strictly necesary to communicate effectively, it is hoped that the conformaty to standards will increase the value and usefulness of the service to third-parties.
+Each Point has three properties: "type", "geometry" (which stores coordinates) and "properties" (which contains all other metadata. Although this format is more complex than is strictly necesary to communicate effectively, it is hoped that the conformity to standards will increase the value and usefulness of the service to third-parties.
