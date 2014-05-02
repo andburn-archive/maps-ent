@@ -8,6 +8,35 @@ An API was designed to accept cross-origin GET requests in a number of formats w
 Request string format
 ------------------------
 
+The request sting must always be directed to HOST/api to be accepted for cross origin requests. The two route formats defined for use in this project follow a common structure. One designed to recieve a general request with no query parameters, and one which accepts multiple variables used for querying entities and geo-data:
+
+	http://HOST/api/events
+
+	http://HOST/api/{altitude-zoom}/{latitude}/{longitude}?categories=1|2
+
+By structuring the data in this way we present a stable, reliable interface to machine users accepting the data nessecary to make informed descisions and return the desired responses.
+
+Accepted query parameters are:
+
+
+### Categories
+
+	categories=battles|cheese|etc 
+A greedy search, results in any or all of the provided categories if provided
+
+### Keywords 
+	keywords=hello\|world 
+A greedy search, results in any or all of the provided keyworks in event descriptions if provided
+### startdate
+	startdate=01-01-2001
+The end date for a query based on time range
+### Enddate 
+	enddate=01-08-2011 
+The end date for a query based on time range
+
+A full request might look like this:
+
+	http://HOST/api/9/-6/55?categories=battles|cheese|etc&keywords=hello\|world&startdate=01-01-2001&enddate=01-08-2011
 
 
 Response format and structure 
