@@ -1,23 +1,20 @@
-Custom-shaped ViewModel classes [^1]
+Custom-shaped ViewModel classes 
 ==================================
 
-From Nerd Dinner: In the scenario above, our DinnerFormViewModel class directly exposes the Dinner model object as a property, along with a supporting SelectList model property.  This approach works fine for scenarios where the HTML UI we want to create within our view template corresponds relatively closely to our domain model objects.
+The MVC pattern makes it possible to efficiently manage common functionality centred around creating, deleting, updating and deleting  content withing a structured application; perfect for a management system. .Net's MVC framework implements this pattern with direct entity to mapping between models and display. 
 
-For scenarios where this isn't the case, one option that you can use is to create a custom-shaped ViewModel class whose object model is more optimized for consumption by the view – and which might look completely different from the underlying domain model object.  For example, it could potentially expose different property names and/or aggregate properties collected from multiple model objects. 
+However, direct mapping of real database entities is not always desirable. Using class mappings directly exposes a model object and has security implications; how much end users know about how data is stored in the database leaves systems open to SQL injection attacks.
 
-Custom-shaped ViewModel classes can be used both to pass data from controllers to views to render, as well as to help handle form data posted back to a controller's action method.  For this later scenario, you might have the action method update a ViewModel object with the form-posted data, and then use the ViewModel instance to map or retrieve an actual domain model object. 
+Supporting direct model mapping from properties is also a convenient approach and works well in scenarios where the rendering desired for views and UIs corresponds to data objects themselves; but this also is not always the case.
 
-Custom-shaped ViewModel classes can provide a great deal of flexibility, and are something to investigate any time you find the rendering code within your view templates or the form-posting code inside your action methods starting to get too complicated.  This is often a sign that your domain models don't cleanly correspond to the UI you are generating, and that an intermediate custom-shaped ViewModel class can help.
+One common approach to represent data or accept data input in different forms  is to implement a "custom-shaped ViewModel class" which acts as an interface between the real data, at a system level, and the data abstrations that are more effective for user interfaces.
 
-What is AutoMapper?
-=======================
+This way the view can be completely independent of the database while still being strictly typed and benefiting from .Net's useful validation and security features. 
 
-AutoMapper is an object-object mapper. Object-object mapping works by transforming an input object of one type into an output object of a different type. Mapping can occur in many places in an application, but mostly in the boundaries between layers, such as between the UI/Domain layers, or Service/Domain layers. Concerns of one layer often conflict with concerns in another, so object-object mapping leads to segregated models, where concerns for each layer can affect only types in that layer.
+Additional benefits, and the main ones desired for this system that this pattern facilitated, were:
 
-Domain Transfer Object (DTO)
-===================================
+* Request or present data belonging to multiple entities in a user-meningful context.
+* Process data from users in a context that makes sense to them, not how the system understands it.
+* Produce a consistent and strucured format for output for to machine users (GeoJson API)
 
-This is a term for an object that is just used to transfer data to an entity. Our ViewModels are not technically DTO's because they would have methods.
-
-
-[^1]: http://nerddinnerbook.s3.amazonaws.com/Part6.htm
+Custom-shaped ViewModel classes are a less disscussed implementation pattern in .Net MVC but they add significant advantages as described above. 

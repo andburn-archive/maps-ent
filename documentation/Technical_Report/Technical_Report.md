@@ -8,11 +8,11 @@ An enterprise level application to manage the content for a map-based RIA and pr
 ##About
 Enterprise Frameworks Project, MSc in Web Technologies (NCI)
 
-**Project Title**  | maps-ent
+|**Project Title**  | maps-ent  | 
 :----------------- | :---------------------
-**Team Members**   | Andrew Burnett
-&nbsp;             | Adam Harrington
-&nbsp;             | Fiona McAndrew - 13121693
+**Team Members**   | Andrew Burnett	 	-13115448
+&nbsp;             | Adam Harrington 	-13113305
+&nbsp;             | Fiona McAndrew 	-13121693
 **Tutor**          | Vikas Sahni
 **Technologies**   | .NET MVC5 EF
 &nbsp;             | C#
@@ -29,7 +29,7 @@ Table of Contents
 3. Software development methodology employed o Requirements analysis
 4. Use cases
 5. Architecture/Design approach
-6. Models (Class Models / Data Models etc.)
+6. Models
 7. Implementation of particular OOP constructs
 8. Design patterns and architectural patterns implemented in the application
 9. ORM tool usage
@@ -40,10 +40,6 @@ Table of Contents
 14. Scalability of the application
 15. Testing Approach (in terms of both functional and non-functional requirements)
 16. Other relevant features of the application
-
-*Saturday 26 April - Important to include*
-- Discuss any Patterns used
-- Project Plan - tasks who did what and when
 
 ------
 
@@ -71,9 +67,9 @@ Development Methodology
  	- Documentation Requirement.
 1. **System Design**:
  The requirement specifications from first phase are studied in this phase and system design is prepared. The System Architecture is defined, which will then inform the specification of the system's Data and Non-Functional Requirements.
-1. ** Implementation:** (TO DO)
-1. **Integration and Testing**: (TO DO)
-1. **Deployment** of system: Once the functional and non functional testing is done, the product is deployed.
+1. ** Implementation:** Writing code
+1. **Integration and Testing**:Functional and non functional testing; Unit testing, integration testing, user acceptance testing and system testing.
+1. **Deployment of system:** Once the functional and non functional testing is done, the product is deployed.
 1. **Maintenance** - Out of scope for this project.
 
 ### Waterfall Model Pros & Cons ##
@@ -84,12 +80,11 @@ Development Methodology
 | Easy to manage due to the rigidity of the model, each phase has specific deliverables and a review process.      |   High amounts of risk and uncertainty. |	
 |Phases are processed and completed one at a time.| Cannot accommodate changing requirements.		
 |Works well for smaller projects where requirements are very well understood.|  Adjusting scope during the life cycle can end a project.
-|Well understood milestones.| Integration is traditionality done as at the very end, which doesn't allow identifying any technological or business bottleneck or challenges early. [^1]
+|Well understood milestones.| Integration is traditionality done as at the very end, which doesn't allow identifying any technological or business bottleneck or challenges early. 
 |Easy to arrange tasks.| No working software is produced until late during the life cycle.	 
 
 
-[^1]: Test deployment was undertaken during the development phase, as the systems needed to be tested.
-(overlay a gantt chart)
+Note: Test deployment was undertaken during the development phase, as the systems needed to be tested.
 
 
 ## Technology ##
@@ -105,8 +100,8 @@ The project was developed using the following technologies.
 
 ##4. Use cases
 
-	Actors:		PendingUser
-				Curator (AuthorizedUser)
+	Actors:		Default User (Pending User)
+				Curator (Authorized)
 				Owner (Admin)
 
 ![alt text](https://raw.githubusercontent.com/andburn/maps-ent/704e025fdcac21269df5455f3aa93f216e29d6fc/documentation/Technical_Report/screenshots/use_cases.png?token=5261006__eyJzY29wZSI6IlJhd0Jsb2I6YW5kYnVybi9tYXBzLWVudC83MDRlMDI1ZmRjYWMyMTI2OWRmNTQ1NWYzYWE5M2YyMTZlMjlkNmZjL2RvY3VtZW50YXRpb24vVGVjaG5pY2FsX1JlcG9ydC9zY3JlZW5zaG90cy91c2VfY2FzZXMucG5nIiwiZXhwaXJlcyI6MTM5OTIxNDE4Mn0%3D--158425feacd9c64ce2a17480dbe4ea8887c699cc "Use Cases") 
@@ -118,39 +113,11 @@ CODE FIRST , ENTITY DIAGRAMS, (andrew to lash in)
 domain model directly maps to database.
 
 
-freebase wont map to database
+Freebase doesn't map to database.
 
-##6. Models (Class Models / Data Models etc.)
-
-(Andrew to write here about Models to Date)
-
-### Model Types
-
-*Actual Models (Models)*
-
-These are the model classes which actually communicate with the back end DB. There is some
-things you can do on these that does not make sense to do elsewhere. Most importantly to note is
-that here is where you can do certain server side validation, and where you usually include every field
-in the DB tables even if they are not shown in the views).
-
-*View Models (ViewModels)*
-
-These are the model classes your views use. While you are still using strictly MVC, you can add a
-ViewModel folder and copy your model classes into it. This gives you an ability to easily add client
-side validation (yeah, were still on the server side but the tooling will generate automatically the
-JavaScript needed on the client side if you let it) or to only show certain fields on your form but to still
-have access to the full set of fields at the back end. 
- 
-
-###2 different types of Data Models :
-
-1. **Database Model** (link for now, hard code when finalised)
-[Database Samples](https://github.com/andburn/maps-ent/blob/master/documentation/DatabaseSample.md)
+##6. Models 
 
 
-
-
-(we may need to create our own version)
 
 ##7. Implementation of particular OOP constructs
 
@@ -159,7 +126,8 @@ we favoured compostite over inheritance.
 
 single responsiblity
 
-repository pattern why we did not use it.
+### Repository pattern ### 
+why we did not use it.
 
 We used MVC
 
@@ -371,7 +339,111 @@ This project uses the waterfall development model testing approach.
 - System testing - scenerio based testing, based on user cases.
 - Acceptance testing - out of scope for college project, lecuturer to do this.
 
-##16. Other relevant features of the application, e.g.,
+##16. Other relevant features of the application
 
-**API** - talk about API here
+### API - Development###
 
+
+Defining the interface between the two applications (Service provider, service user) required negotiation and consideration of the differing needs of each.
+
+An API was designed to accept cross-origin GET requests in a number of formats which were defined in consultation with the primary service client. The needs of the client application at present can be broken into to categories, query-less and query-full requests, the later having many permutations of actual usage.
+
+Request string format
+------------------------
+
+
+
+Response format and structure 
+---------------------------
+
+The response format needed to be interpreted by a JavaScript application, as such the returning of data structured as a JSON object of results suited the client needs over xml which would require additional parsing.
+
+Creating a JSON response, in a predefined format in the .Net MVC framework requires careful planning and data entity abstraction, because true entity names or database structure should not be exposed to the client. To this end an API ViewModel was created to act as the "view" or response abstraction
+
+A number of desci
+
+```JavaScript 
+{ "type": "FeatureCollection",
+    "features": [
+      { "type": "Feature",
+        "geometry": {"type": "Point", "coordinates": [102.0, 0.5]},
+        "properties": {"prop0": "value0"}
+        },
+      { "type": "Feature",
+        "geometry": {
+          "type": "LineString",
+          "coordinates": [
+            [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+            ]
+          },
+        "properties": {
+          "prop0": "value0",
+          "prop1": 0.0
+          }
+        },
+      { "type": "Feature",
+         "geometry": {
+           "type": "Polygon",
+           "coordinates": [
+             [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+               [100.0, 1.0], [100.0, 0.0] ]
+             ]
+         },
+         "properties": {
+           "prop0": "value0",
+           "prop1": {"this": "that"}
+           }
+         }
+       ]
+     }
+```
+Geo Json example
+GeoJson format uses Longitude/Latitude ordering rather than the Latitude/Lonitude ordering ISO 6709 standard employed by most other systems including Google Maps. Despite this, it was decided to put systems implementation secondary to aherance to the GeoJson format in order to increase accessability of the API for other systems.
+
+To compensate, the MapsAgo API includes a `location` propery with `latitude` and `longitude` properties 
+
+
+```javascript
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": [53.365, -6.21]
+          },
+          "properties": {
+              "name": "Battle of Clontarf",
+              "excerpt": "The Battle of Clontarf took place on 23 April 1014 between the forces of Brian Boru and the...",
+              "startDate": "1014-04-23",
+              "endDate": "1014-04-23",
+              "category": "Battle",
+              "resources": [
+                {
+                    "type": "image",
+                    "name": "Www",
+                    "url": "http://upload.wikimedia.org/wikipedia/commons/e/e9/Www.wesleyjohnston.com-users-ireland-maps-historical-map1014.gif"
+                }, {
+                    "type": "link",
+                    "name": "Wikipedia Link",
+                    "url": "http://en.wikipedia.org/wiki/index.html?curid=155550"
+                }],
+              "location": {
+                  "alias": null,
+                  "name": "Clontarf, Dublin",
+                  "latitude": 53.365,
+                  "longitude": -6.21
+              },
+              "description": "The Battle of Clontarf took place on 23 April 1014 between the forces of Brian Boru and the forces led by the King of Leinster, Máel Mórda mac Murchada: composed mainly of his own men, Viking mercenaries from Dublin and the Orkney Islands led by his cousin Sigtrygg."
+          }
+      },
+    {
+        "type": "Feature"
+    }]
+}
+```
+
+In this way each response has two properties, `type` with value `FeaturesCollection` and `features` as an array of points.
+
+Each Point has three properties: "type", "geometry" (which stores coordinates) and "properties" (which contains all other metadata. Although this format is more complex than is strictly necesary to communicate effectively, it is hoped that the conformaty to standards will increase the value and usefulness of the service to third-parties.
