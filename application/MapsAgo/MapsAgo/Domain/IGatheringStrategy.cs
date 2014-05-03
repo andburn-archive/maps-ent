@@ -9,9 +9,9 @@ namespace MapsAgo.Domain
     public interface IGatheringStrategy
     {
 
-        Task<IList<ISearchResult>> Search(string query, string type);
+        IList<ISearchResult> Search(string query, string type);
 
-        Task<IDataResource> Details(string id);
+        IDataResource Details(string id);
 
     }
 }
