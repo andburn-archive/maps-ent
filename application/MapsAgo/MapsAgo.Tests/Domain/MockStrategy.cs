@@ -10,7 +10,7 @@ namespace MapsAgo.Tests.Domain
 {
     class MockStrategy : IGatheringStrategy
     {
-        public async Task<IList<ISearchResult>> Search(string query, string type)
+        public IList<ISearchResult> Search(string query, string type)
         {
             return new List<ISearchResult> {
                 new MockSearchResult
@@ -26,7 +26,7 @@ namespace MapsAgo.Tests.Domain
             };
         }
 
-        public async Task<IDataResource> Details(string id)
+        public IDataResource Details(string id)
         {
             return new MockDataResource
             {
