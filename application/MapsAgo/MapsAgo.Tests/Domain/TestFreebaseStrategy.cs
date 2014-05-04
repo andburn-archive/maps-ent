@@ -34,6 +34,9 @@ namespace MapsAgo.Tests.Domain
             IDataResource results = Gatherer.Details("/m/0c55s");
 
             Assert.IsTrue(results.EventName == "Battle of Hastings");
+            Assert.IsTrue(results.EventDescription.Contains(
+                "background to the battle was the death of the"));
         }
+
     }
 }

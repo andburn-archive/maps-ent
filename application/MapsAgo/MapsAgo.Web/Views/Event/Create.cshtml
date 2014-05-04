@@ -7,102 +7,14 @@
 <h2>@ViewBag.Title</h2>
 
 <div class="row">
-    <div class="well col-lg-6">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-    <fieldset class="form-horizontal">
-        <legend>New Event</legend>
-        <hr />
-        @Html.ValidationSummary(true)
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventName, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBoxFor(m => m.EventName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventName)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventExcerpt, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBoxFor(m => m.EventExcerpt, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventExcerpt)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(m => m.EventDescription, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextArea("EventDescription", "", 5, 15, new { @class = "form-control"})
-                @Html.ValidationMessageFor(model => model.EventDescription)
-            </div>
-        </div>        
-
-        @Html.Partial("_EventPartials/_StartDate")
-        @Html.Partial("_EventPartials/_EndDate")
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventTypeId, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.DropDownListFor(m => m.EventTypeId, null, string.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventTypeId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventSource, new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBoxFor(m => m.EventSource, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.EventSource)
-            </div>
-        </div>
-
-        <hr/>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LocationId, "Existing Location", new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.DropDownListFor(m => m.LocationId, null , string.Empty, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.LocationId)
-            </div>
-        </div>
-        <hr />
-        <h4>Or, add a new Location</h4>
-        <div class="form-group">
-            @Html.Label("LocationName", new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBox("LocationName", null, new { @class = "form-control" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitude, "Coordinates", new { @class = "control-label col-md-4" })
-            <div class="col-md-4">
-                @Html.TextBoxFor(m => m.Latitude, new { @class = "form-control", type = "number", placeholder = "Latitude" })
-                @Html.ValidationMessageFor(model => model.Latitude)
-            </div>
-            <div class="col-md-4">
-                @Html.TextBoxFor(m => m.Longitude, new { @class = "form-control", type = "number", placeholder = "Longitude" })
-                @Html.ValidationMessageFor(model => model.Longitude)
-            </div>
-        </div>
-
-
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-8">
-                <input type="submit" value="Create" class="btn btn-info" />
-            </div>
-        </div>
-    </fieldset>
-
-        }
+    <div class="col-lg-6 well">
+        @Html.Partial("_EventPartials/_CreateForm")
     </div>
     <div class="col-lg-6">
-
+        @Html.Partial("_EventPartials/_SearchBox")
+        @Html.Partial("_EventPartials/_SearchResults")
     </div>
 </div>
-
 
 <div>
     @Html.ActionLink("Back to List", "Index")

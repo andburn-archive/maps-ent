@@ -15,13 +15,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace MapsAgo.Web.Controllers
 {
+    [AuthorizeByRole(RoleType.Admin, RoleType.Authorized)]
     public class EventController : Controller
     {
         private MapsAgoDbContext db = new MapsAgoDbContext();
 
         // only the Admin and AuthorizedUser users can view the Events page
-        // GET: /Event/
-        [AuthorizeByRole(RoleType.Admin, RoleType.Authorized)]
+        // GET: /Event/     
         public ActionResult Index()
         {
             var events = db.Events
@@ -117,6 +117,7 @@ namespace MapsAgo.Web.Controllers
             return View(ev);
         }
 
+        [AuthorizeByRole(RoleType.Admin)]
         // GET: /Event/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -133,6 +134,7 @@ namespace MapsAgo.Web.Controllers
         }
 
         // POST: /Event/Delete/5
+        [AuthorizeByRole(RoleType.Admin)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

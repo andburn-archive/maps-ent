@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MapsAgo.Domain.ISearchResult>
+
+<ul>
+    @foreach (var item in Model)
+    {
+         <li>@Html.ActionLink("Add", "FillForm", "Event", 
+                new { fbId = item.Id }, null)</li>
+    }    
+</ul>
+@*http://blogs.msdn.com/b/stuartleeks/archive/2011/04/13/asp-net-mvc-partial-rendering-and-ajaxattribute.aspx*@

@@ -76,6 +76,7 @@ namespace MapsAgo.Domain.Freebase
                 "mqlread", mql);
 
             HttpResponseMessage response = client.GetAsync(queryUrl).Result;
+            IDataResource dataresource  = new FreebaseDataResource();
 
             if (response.IsSuccessStatusCode)
             {
@@ -87,77 +88,79 @@ namespace MapsAgo.Domain.Freebase
                     detail = items[0];
                 }
 
-                FreebaseDataResource resource = new FreebaseDataResource
-                {   
-                    EventName = detail.Name,
-                    EventDescription = detail.Description,
+                dataresource.EventName = detail.Name;
+                dataresource.EventDescription = detail.Description;
 
-                    EventStartMonth = ExtractDate(detail.StartDate).Month,
-                    EventStartDay = ExtractDate(detail.StartDate).Day,
-                    EventStartYear = ExtractDate(detail.EndDate).Year,
-                    EventEndMonth = ExtractDate(detail.EndDate).Month,
-                    EventEndDay = ExtractDate(detail.EndDate).Day,
-                    EventEndYear = ExtractDate(detail.EndDate).Year,
+                dataresource.EventStartMonth = ExtractDate(detail.StartDate).Month;
+                dataresource.EventStartDay = ExtractDate(detail.StartDate).Day;
+                dataresource.EventStartYear = ExtractDate(detail.EndDate).Year;
+                dataresource.EventEndMonth = ExtractDate(detail.EndDate).Month;
+                dataresource.EventEndDay = ExtractDate(detail.EndDate).Day;
+                dataresource.EventEndYear = ExtractDate(detail.EndDate).Year;
                     
-                    //EventSource = result.EventSource,
+                //EventSource = result.EventSource,
 
-                    Latitude = (double) ExtractLocation(detail.Location)["Latitude"],
-                    Longitude = (double) ExtractLocation(detail.Location)["Longitude"],
-                    LocationName = (string) ExtractLocation(detail.Location)["Name"],
-                    LocationAlias = (string) ExtractLocation(detail.Location)["Alias"]
+                dataresource.Latitude = Double.Parse(ExtractLocation(detail.Location)["Latitude"].ToString());
+                dataresource.Longitude = Double.Parse(ExtractLocation(detail.Location)["Longitude"].ToString());
+                dataresource.LocationName = (string) ExtractLocation(detail.Location)["Name"];
+                dataresource.LocationAlias = (string) ExtractLocation(detail.Location)["Alias"];
 
-                    // TODO: should create this mid
-                    // Mid = detail.Mid,
-                    // TODO: need to map MQL type to EventType
-                    // Type = result.Type;
-                };
-                return (IDataResource) result;
+                // TODO: should create this mid
+                // Mid = detail.Mid,
+                // TODO: need to map MQL type to EventType
+                // Type = result.Type;
             }
             else
             {
-                Console.WriteLine(response.ReasonPhrase);
+                // error
                 return (IDataResource) new FreebaseDataResource();
             }
 
             // -- Topic part
 
-            //Uri topicAddress = new Uri("https://www.googleapis.com/freebase/v1/topic" + mid);
-            //UriTemplate topicTemplate = new UriTemplate(
-            //    "{mid}?filter={filter}&key={key}");
-            //Uri queryUrl = topicTemplate.BindByPosition(topicAddress, "/m/0c55s",
-            //    "(/common/topic/description /common/topic/topic_equivalent_webpage)",
-            //    "AIzaSyAq8f-ZUQUre00arIXI5hDl41XjaSPFqVI");
+            string filter = "(/common/topic/description /common/topic/topic_equivalent_webpage)";
 
-            //HttpClient client = new HttpClient();
+            UriTemplate topicTemplate = new UriTemplate(
+                "{id}?filter={filter}&key={key}");
+            Uri topicUrl = topicTemplate.BindByPosition(baseUri, 
+                id, filter, "AIzaSyAq8f-ZUQUre00arIXI5hDl41XjaSPFqVI");
 
-            //client.BaseAddress = new Uri("");
-            //client.DefaultRequestHeaders.Accept.Clear();
-            //client.DefaultRequestHeaders.Accept.Add(
-            //    new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpClient topicClient = new HttpClient();
+            topicClient.BaseAddress = new Uri("https://www.googleapis.com/freebase/v1/topic" + id);
+            topicClient.DefaultRequestHeaders.Accept.Clear();
+            topicClient.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
 
-            //response = await client.GetAsync("?filter=/common/topic/description"
-            //   + "&filter=/common/topic/topic_equivalent_webpage"
-            //   + "&keyAIzaSyAq8f-ZUQUre00arIXI5hDl41XjaSPFqVI");
+            response = topicClient.GetAsync("?filter=/common/topic/description"
+               + "&filter=/common/topic/topic_equivalent_webpage"
+               + "&keyAIzaSyAq8f-ZUQUre00arIXI5hDl41XjaSPFqVI").Result;
 
-            ////Console.WriteLine(queryUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                JsonTopicResult topicResult = response.Content.ReadAsAsync<JsonTopicResult>().Result;
+                dataresource.EventDescription = ExtractDescription(topicResult)[1];
+                dataresource.EventExcerpt = ExtractDescription(topicResult)[0];
+                return dataresource;
+            }
+            else
+            {
+                // error
+                return (IDataResource)new FreebaseDataResource();
+            }
 
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    string r = await response.Content.ReadAsStringAsync();
-            //    Console.WriteLine(r);
+        }
 
-            //    JsonTopicResult products = await response.Content.ReadAsAsync<JsonTopicResult>();
-
-            //    Console.WriteLine(products.ToString());
-
-            //    return null;
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Error: " + response.ReasonPhrase);
-            //    return null;
-            //}
-
+        private string[] ExtractDescription(JsonTopicResult topicResult)
+        {
+            var descp = topicResult.Property.Description;
+            if (descp.Values.Count > 0)
+            {
+                return new string[]{
+                    descp.Values[0].Text,
+                    descp.Values[0].Value
+                };
+            }
+            return new string[] { "Not Found", "Not Found" };
         }
 
         private static DateTime ExtractDate(DateTime[] dates)
