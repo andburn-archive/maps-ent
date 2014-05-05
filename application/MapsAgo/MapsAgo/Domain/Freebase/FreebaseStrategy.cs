@@ -83,7 +83,7 @@ namespace MapsAgo.Domain.Freebase
                 JsonMqlResult result = response.Content.ReadAsAsync<JsonMqlResult>().Result;
                 IList<JsonMqlItem> items = result.result;
                 JsonMqlItem detail = new JsonMqlItem();
-                if (items.Count >= 0)
+                if (items.Count > 0)
                 {
                     detail = items[0];
                 }
@@ -165,7 +165,7 @@ namespace MapsAgo.Domain.Freebase
 
         private static DateTime ExtractDate(DateTime[] dates)
         {
-            if (dates.Length >= 0)
+            if (dates != null && dates.Length > 0)
             {
                 return dates[0];
             }
@@ -175,12 +175,12 @@ namespace MapsAgo.Domain.Freebase
 
         private static Hashtable ExtractLocation(JsonLocationItem[] item)
         {
-            if (item.Length >= 0)
+            if (item != null && item.Length > 0)
             {
                 var Alias = "";
                 var lat = 0.0;
                 var lon = 0.0;
-                if (item[0].Alias.Length >= 0)
+                if (item[0].Alias.Length > 0)
                 {
                     Alias = item[0].Alias[0];
                 }
@@ -199,7 +199,7 @@ namespace MapsAgo.Domain.Freebase
                 loc.Add("Longitude", lon.ToString());
                 return loc;
             }
-            return null;
+            return new Hashtable();
         }
     }
 }

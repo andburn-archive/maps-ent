@@ -1,4 +1,5 @@
-﻿using MapsAgo.Model;
+﻿using MapsAgo.Common;
+using MapsAgo.Model;
 using MapsAgo.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -79,6 +80,12 @@ namespace MapsAgo.Web.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var RoleManager = new RoleManager<IdentityRole>(
+                        new RoleStore<IdentityRole>(new MapsAgoDbContext()));
+                    IdentityRole DefRole =
+                        RoleManager.FindByName(RoleType.Default.ToString());
+                    UserManager.AddToRole(user.Id, DefRole.Name); 
+
                     await SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

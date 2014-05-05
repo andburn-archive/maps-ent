@@ -4,8 +4,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MapsAgo.Model;
 using MapsAgo.Common;
-
-// TODO: sort or remove this test
+using MapsAgo.Web.Controllers;
 
 // This code tests the Resource model
 //
@@ -17,27 +16,28 @@ namespace MapsAgo.Tests.Model
 {    
     [TestClass]
     public class ResourceModelTest
-    {
+    {       
+
         [TestMethod]
         public void Resource_Should_Not_Be_Valid_When_Some_Properties_Incorrect()
         {
+
             //Arrange
+            var controller = new ModelStateTestController();
             Resource resource = new Resource()
             {
                 Id = 1,
                 Name = "Wikipedia",
                 Type = ResourceType.Link,
-                Url = "wikipedia",  // <-  this will fail a test, as the url should be appropriately 
+                Url = "wikipedia link",  // <-  this will fail a test, as the url should be appropriately 
                 Description = "Wikipedia Link"
             };
 
             // Act
-            // FIX: have to remove this for now
-            //bool isValid = resource.IsValid;
-            bool isValid = false;
+            var result = controller.TestTryValidateModel(resource);
 
-            //Assert
-            Assert.IsFalse(isValid);
+            // Assert
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
@@ -45,6 +45,7 @@ namespace MapsAgo.Tests.Model
         {
 
             //Arrange
+            var controller = new ModelStateTestController();
             Resource resource = new Resource()
             {
                 Id = 1,
@@ -52,16 +53,13 @@ namespace MapsAgo.Tests.Model
                 Type = ResourceType.Link,
                 Url = "http://en.wikipedia.org/wiki/index.html?curid=1033164",
                 Description = "Wikipedia Link"
-
             };
 
             // Act
-            // FIX: have to remove this for now
-            //bool isValid = resource.IsValid;
-            bool isValid = true;
+            var result = controller.TestTryValidateModel(resource);
 
-            //Assert
-            Assert.IsTrue(isValid);
+            // Assert
+            Assert.IsTrue(result);
         }
     } 
 }

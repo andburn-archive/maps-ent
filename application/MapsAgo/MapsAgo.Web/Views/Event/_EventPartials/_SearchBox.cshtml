@@ -1,13 +1,13 @@
 ﻿@model MapsAgo.Web.ViewModels.NewEventViewModel
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Event", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
     <fieldset class="form-horizontal">
         <legend>Search Online</legend>
         <div class="form-group">
             <div class="col-md-8 col-md-offset-2">
-                @Html.TextBoxFor(m => m.EventName, new
+                @Html.TextBox("query", null, new
                         {
                             @class = "form-control",
                             type = "search",
@@ -25,13 +25,13 @@
                 <input type="radio" name="cat-group" value="battles" checked />&nbsp;Battles
             </div>
             <div class="col-md-4">
-                <input type="radio" name="cat-group" value="diasters" checked />&nbsp;Diasters
+                <input type="radio" name="cat-group" value="diasters" />&nbsp;Diasters
             </div>
             <div class="col-md-4 col-md-offset-2">
-                <input type="radio" name="cat-group" value="artists" checked />&nbsp;Artists
+                <input type="radio" name="cat-group" value="artists"  />&nbsp;Artists
             </div>
             <div class="col-md-4">
-                <input type="radio" name="cat-group" value="recordings" checked />&nbsp;Recordings
+                <input type="radio" name="cat-group" value="recordings" />&nbsp;Recordings
             </div>
         </div>
     </fieldset>

@@ -18,9 +18,14 @@ Enterprise Frameworks Project, MSc in Web Technologies (NCI)
 &nbsp;             | C#
 &nbsp;             | Azure
 **Source**         | https://github.com/andburn/maps-ent
-**URL**            | n/a
+**URL**            | http://mapsago2.azurewebsites.net/
 **Licence**        | n/a
 
 
 ###Project Blog
 http://enterpriseframeworks.wordpress.com/
+
+###Notes
+Test Administrator functionality
+user: Admin
+pass: 123456

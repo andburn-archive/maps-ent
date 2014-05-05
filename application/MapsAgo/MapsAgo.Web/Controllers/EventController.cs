@@ -12,15 +12,18 @@ using MapsAgo.Web.Models;
 using MapsAgo.Common;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MapsAgo.Domain;
+using MapsAgo.Domain.Freebase;
+using MapsAgo.Web.Views.ViewModels;
 
 namespace MapsAgo.Web.Controllers
 {
+    // only the Admin and AuthorizedUser users can view the Events page
     [AuthorizeByRole(RoleType.Admin, RoleType.Authorized)]
     public class EventController : Controller
     {
         private MapsAgoDbContext db = new MapsAgoDbContext();
-
-        // only the Admin and AuthorizedUser users can view the Events page
+        
         // GET: /Event/     
         public ActionResult Index()
         {
@@ -46,17 +49,52 @@ namespace MapsAgo.Web.Controllers
             return View(ev);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(
+            string mid = "default", string query = "default")
         {
-
+            // TODO: make this part of params
+            string type = "(all type:/military/military_conflict)";
+            // TODO: User IoC here
+            InfoGatherer gather = new InfoGatherer(new FreebaseStrategy());
+            SearchAndCreate sc = new SearchAndCreate(
+                new List<ISearchResult>(),
+                (IDataResource) new FreebaseDataResource(),
+                new NewEventViewModel()
+                );
+            if (mid != "default")
+            {
+                // get the details of id
+                sc.details = gather.Details(mid);
+            }
+            if (query != "default")
+            {
+                // get the search results
+                sc.results = gather.Search(query, type);
+            }
+            ViewBag.Package = sc;
             ViewBag.LocationId = new SelectList(db.Locations, "Id", "Name");
             ViewBag.EventTypeId = new SelectList(db.EventTypes, "Id", "Name");
             ViewBag.ApplicationUserId = new SelectList(db.Users, "Id", "Email");
-            return View();
+            return View(sc);
         }
+
         [HttpPost]
-        public ActionResult Create(NewEventViewModel newEvent)
+        public ActionResult Search(string query = "default")
         {
+            if (query != "default")
+            {
+                return RedirectToAction("Create", "Event", new { query = query });
+            }
+            return RedirectToAction("Create", "Event");
+        }
+
+        [HttpPost]
+        public ActionResult Create(NewEventViewModel newEvent, int postid = -1)
+        {
+            if (postid == -1) {
+
+            }
+
             if (ModelState.IsValid)
             {
                 Event e = newEvent.MapToEvent();

@@ -210,6 +210,7 @@
     <Compile Include="ViewModels\UserViewModels.cs" />
     <Compile Include="Views\ViewModels\APIViewModel.cs" />
     <Compile Include="Views\ViewModels\CreateFullViewModel.cs" />
+    <Compile Include="Views\ViewModels\SearchAndCreate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -217,6 +218,7 @@
     <Content Include="Content\bootstrap-themed.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\home.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -229,7 +231,9 @@
     <None Include="Properties\PublishProfiles\mapsago %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mapsago.pubxml" />
     <None Include="Properties\PublishProfiles\mapsago-dash.pubxml" />
+    <None Include="Properties\PublishProfiles\mapsago2.pubxml" />
     <None Include="Scripts\jquery-2.1.0.intellisense.js" />
+    <Content Include="Images\paris-map.jpg" />
     <Content Include="Scripts\addevent.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

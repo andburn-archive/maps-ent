@@ -1,4 +1,6 @@
-﻿@model MapsAgo.Web.ViewModels.NewEventViewModel
+﻿@model MapsAgo.Web.Views.ViewModels.SearchAndCreate
+
+@using MapsAgo.Domain
 
 @{
     ViewBag.Title = "New Event";
@@ -8,18 +10,21 @@
 
 <div class="row">
     <div class="col-lg-6 well">
-        @Html.Partial("_EventPartials/_CreateForm")
+        @Html.Partial("_EventPartials/_CreateForm",
+            new MapsAgo.Web.ViewModels.NewEventViewModel(Model.details))
     </div>
     <div class="col-lg-6">
-        @Html.Partial("_EventPartials/_SearchBox")
-        @Html.Partial("_EventPartials/_SearchResults")
+        @Html.Partial("_EventPartials/_SearchBox",
+                 new MapsAgo.Web.ViewModels.NewEventViewModel())
+        @Html.Partial("_EventPartials/_SearchResults", 
+            new List<ISearchResult>(Model.results))
+        </div>
     </div>
-</div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval", "~/bundles/addevent")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval", "~/bundles/addevent")
+    }

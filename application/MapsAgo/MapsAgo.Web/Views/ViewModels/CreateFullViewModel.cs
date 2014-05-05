@@ -6,11 +6,33 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.Spatial;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MapsAgo.Domain;
 
 namespace MapsAgo.Web.ViewModels
 {
     public class NewEventViewModel
     {
+        public NewEventViewModel() {}
+
+        public NewEventViewModel(IDataResource resource)
+        {
+            EventStartYear = resource.EventStartYear;
+            EventStartMonth = resource.EventStartMonth;
+            EventStartDay = resource.EventStartDay;
+            EventEndYear = resource.EventEndYear;
+            EventEndMonth = resource.EventEndMonth;
+            EventEndDay = resource.EventEndDay;
+            EventName = resource.EventName;
+            EventExcerpt = resource.EventExcerpt;
+            EventDescription = resource.EventDescription;
+            EventSource = resource.EventSource;
+            Latitude = resource.Latitude;
+            Longitude = resource.Longitude;
+            LocationName = resource.LocationName;
+            LocationAlias = resource.LocationAlias;
+            // TODO: remove hardcoding here
+            EventTypeId = 1;
+        }
 
         #region Public Methods
         // Mapping

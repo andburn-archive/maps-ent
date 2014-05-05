@@ -13,8 +13,8 @@ Adam.Harrington@student.ncirl.ie
 
 
 Code:
-Private github repository, invite sent to vikas.sahni@ncirl.ie
+Public github repository:
 https://github.com/andburn/maps-ent
 
 Deployed URL:
-http://mapsago.azurewebsites.net/
+http://mapsago2.azurewebsites.net/

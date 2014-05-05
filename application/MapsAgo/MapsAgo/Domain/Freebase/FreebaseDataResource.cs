@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MapsAgo.Domain.Freebase
 {
-    class FreebaseDataResource : IDataResource
+    public class FreebaseDataResource : IDataResource
     {
         public int EventStartYear { get; set; }
 
