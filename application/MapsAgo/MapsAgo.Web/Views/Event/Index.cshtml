@@ -1,19 +1,22 @@
-﻿@model IEnumerable<MapsAgo.Model.Event>
+﻿@model PagedList.IPagedList<MapsAgo.Model.Event>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>List of Events</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table table-bordered table-striped">
     <tr>
 
         <th>
-            Event <!-- @Html.DisplayNameFor(model => model.Name) -->
+            Event @*Html.DisplayNameFor(model => model.Name)*@
         </th>
         <th>
             Description @*@Html.DisplayNameFor(model => model.Excerpt)*@
@@ -22,10 +25,10 @@
             Location @*@Html.DisplayNameFor(model => model.Location.Name)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            Created@*Html.DisplayNameFor(model => model.DateCreated)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastModified)
+            Modified@*Html.DisplayNameFor(model => model.LastModified)*@
         </th>
         <th>
             Created By
@@ -39,25 +42,25 @@
             <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
             <dl>
                 <dt>
-                    @Html.DisplayNameFor(model => model.Type.Name)
+                    @Html.DisplayNameFor(m => item.Name)
                 </dt>
                 <dd>
                     @Html.DisplayFor(modelItem => item.Type.Name)
                 </dd>
-                <dt>
-                    @Html.DisplayNameFor(model => model.Source)
+                @*@<dt>
+                    @Html.DisplayNameFor(m => item.Source)
                 </dt>
                 <dd>
                     @Html.DisplayFor(modelItem => item.Source)
-                </dd>
+                </dd>*@
                 <dt>
-                    @Html.DisplayNameFor(model => model.StartDate)
+                    @Html.DisplayNameFor(m => item.StartDate)
                 </dt>
                 <dd>
                     @Html.DisplayFor(modelItem => item.StartDate)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(model => model.EndDate)
+                    @Html.DisplayNameFor(m => item.EndDate)
                 </dt>
                 <dd>
                     @Html.DisplayFor(modelItem => item.EndDate)
@@ -95,3 +98,8 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

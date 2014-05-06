@@ -89,7 +89,7 @@ namespace MapsAgo.Domain.Freebase
                 }
 
                 dataresource.EventName = detail.Name;
-                dataresource.EventDescription = detail.Description;
+                //dataresource.EventDescription = detail.Description;
 
                 dataresource.EventStartMonth = ExtractDate(detail.StartDate).Month;
                 dataresource.EventStartDay = ExtractDate(detail.StartDate).Day;
@@ -163,18 +163,25 @@ namespace MapsAgo.Domain.Freebase
             return new string[] { "Not Found", "Not Found" };
         }
 
-        private static DateTime ExtractDate(DateTime[] dates)
+        private static DateTime ExtractDate(string[] dates)
         {
             if (dates != null && dates.Length > 0)
             {
-                return dates[0];
+                var date = dates[0];
+                if (date.Length == 4)
+                {
+                    date = date + "-01-01";
+                }
+                DateTime result = new DateTime();
+                var parsed = DateTime.TryParse(date, out result);
+                return result;                
             }
             // Error value if no dates found
-            return DateTime.Now;
+            return DateTime.MinValue;
         }
 
         private static Hashtable ExtractLocation(JsonLocationItem[] item)
-        {
+        {           
             if (item != null && item.Length > 0)
             {
                 var Alias = "";
@@ -199,7 +206,16 @@ namespace MapsAgo.Domain.Freebase
                 loc.Add("Longitude", lon.ToString());
                 return loc;
             }
-            return new Hashtable();
+            // else return default values
+            Hashtable defaults = new Hashtable();
+            defaults.Add("Name", "Unknown");
+            defaults.Add("Type", "Unknown");
+            defaults.Add("Id", "0");
+            defaults.Add("Alias", "Unknown");
+            defaults.Add("Latitude", "0.0");
+            defaults.Add("Longitude", "0.0");
+
+            return defaults;
         }
     }
 }

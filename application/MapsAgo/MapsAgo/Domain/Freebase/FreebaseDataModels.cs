@@ -83,14 +83,14 @@ namespace MapsAgo.Domain.Freebase
         public string Name { get; set; }
 
         [JsonProperty("/time/event/end_date")]
-        public DateTime[] EndDate { get; set; }
+        public string[] EndDate { get; set; }
 
         [JsonProperty("/time/event/start_date")]
-        public DateTime[] StartDate { get; set; }
+        public string[] StartDate { get; set; }
 
         // doesn't work should be removed from MQL
-        [JsonProperty("/common/topic/description")]
-        public string Description { get; set; }
+        //[JsonProperty("/common/topic/description")]
+        //public string Description { get; set; }
 
         [JsonProperty("/common/topic/image")]
         public JsonImageItem[] Image { get; set; }

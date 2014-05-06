@@ -26,7 +26,7 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.EventDescription, new { @class = "control-label col-md-4" })
                 <div class="col-md-8">
-                    @Html.TextArea("EventDescription", "", 5, 15, new { @class = "form-control" })
+                    @Html.TextArea("EventDescription", Model.EventDescription, 5, 15, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.EventDescription)
                 </div>
             </div>

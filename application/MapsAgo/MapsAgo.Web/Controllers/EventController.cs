@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using MapsAgo.Domain;
 using MapsAgo.Domain.Freebase;
 using MapsAgo.Web.Views.ViewModels;
+using PagedList;
 
 namespace MapsAgo.Web.Controllers
 {
@@ -25,13 +26,17 @@ namespace MapsAgo.Web.Controllers
         private MapsAgoDbContext db = new MapsAgoDbContext();
         
         // GET: /Event/     
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var events = db.Events
                 .Include(e => e.Location)
                 .Include(e => e.Type)
-                .Include(e => e.User);
-            return View(events.ToList());
+                .Include(e => e.User)
+                .OrderBy(e => e.LastModified);
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(events.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: /Event/Details/5
